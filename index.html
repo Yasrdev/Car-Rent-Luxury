@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARIZ CARS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- Favicon for modern browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/fav-icon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-MrOqjI1F5K3kW8pQqTjGZpYz3rj4Zp3Hk8D5zHkgh3FZ8y5gTjZo3jK6F8F9K3G5G" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<!-- Navbar desktop (visible seulement sur desktop) -->
+<nav class="navbar" id="navbar">
+  <a href="index.html">
+    <img src="/assets/images/bariz-logo.png" alt="Logo BARIZ CARS" id="logo">
+  </a>
+  <button class="burger" id="burger">
+    <i class="fas fa-bars"></i>
+  </button>
+  <ul class="menu" id="menu">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">À propos</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+<div class="fullscreen-menu" id="fullscreenMenu">
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">À propos</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="info-nav">
+    <i class="fa-brands fa-square-instagram"></i>
+    <i class="fas fa-phone"></i>
+    <i class="fas fa-envelope"></i>
+  </div>
+</div>
+
+  <!-- Section Accueil -->
+  <section class="hero">
+    <video autoplay muted loop id="bg-video">
+      <source src="./assets/videos/CAR_HD.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo.
+    </video>
+
+    <div class="hero-content">
+       <div class="hero-text">
+        <p class="hero-logo">BARIZ MOTORSPORT</p>
+        <h1>Machines<br>Extraordinaire</h1>
+       </div>
+        <div class="btn-group">
+            <a href="#" class="btn btn-primary">EXPLORER<i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="btn btn-secondary">EN SAVOIR PLUS<i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
+    <div class="defiler">
+        <p>DEFILER</p>
+        <img src="/assets/images/fleche.png" alt="fleshe">
+    </div>
+  </section>
+  
+  <!-- Section Car Swiper -->
+  <section class="car-swiper">
+    <div class="swiper-header">
+      <h1>COLLECTIONS SIGNATURE</h1>
+      <h2>Machines Extraordinaires</h2>
+    </div>
+    
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Véhicule Tout-Terrain">
+          </div>
+          <div class="slide-content">
+            <div>
+              <h3 class="slide-title">Explorer Pro 4x4</h3>
+              <p class="slide-description">Conçu pour les aventures les plus extrêmes, ce véhicule combine puissance et élégance.</p>
+            </div>
+            <div class="slide-footer">
+              <div class="slide-price">À partir de 89 900€</div>
+              <button class="slide-button">Découvrir</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="swiper-slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80" alt="Voiture de Luxe">
+          </div>
+          <div class="slide-content">
+            <div>
+              <h3 class="slide-title">Luxury GT</h3>
+              <p class="slide-description">Élégance intemporelle et performances exceptionnelles pour les connaisseurs.</p>
+            </div>
+            <div class="slide-footer">
+              <div class="slide-price">À partir de 245 000€</div>
+              <button class="slide-button">Découvrir</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="swiper-slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Moto">
+          </div>
+          <div class="slide-content">
+            <div>
+              <h3 class="slide-title">Urban Rider</h3>
+              <p class="slide-description">Une moto présentée et dégustée par les passionnés de deux roues.</p>
+            </div>
+            <div class="slide-footer">
+              <div class="slide-price">À partir de 18 500€</div>
+              <button class="slide-button">Découvrir</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 4 -->
+        <div class="swiper-slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="SUV de Luxe">
+          </div>
+          <div class="slide-content">
+            <div>
+              <h3 class="slide-title">Prestige SUV</h3>
+              <p class="slide-description">Alliant confort suprême et capacités tout-terrain pour les plus exigeants.</p>
+            </div>
+            <div class="slide-footer">
+              <div class="slide-price">À partir de 125 000€</div>
+              <button class="slide-button">Découvrir</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Slide 5 -->
+        <div class="swiper-slide">
+          <div class="slide-image">
+            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80" alt="Sport Car">
+          </div>
+          <div class="slide-content">
+            <div>
+              <h3 class="slide-title">Sport Elite</h3>
+              <p class="slide-description">Performance pure et design aérodynamique pour les amateurs de sensations fortes.</p>
+            </div>
+            <div class="slide-footer">
+              <div class="slide-price">À partir de 320 000€</div>
+              <button class="slide-button">Découvrir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+      
+      <!-- Navigation buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+  <section class="Contact">
+    <div class="Section-header">
+      <h1>Contactez-nous</h1>
+      <h2>Nous Joindre</h2>
+    </div>
+  <div class="cards-container">
+    <a href="https://maps.app.goo.gl/Bt2JjcFFiWS7PYCG8" target="_blank">
+    <div class="card">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Localisation</h3>
+      <p>Voir Sur google map</p>
+    </div>
+    </a>
+    <div class="card">
+      <i class="fas fa-phone"></i>
+      <h3>Telephone</h3>
+      <p>+212600000000</p>
+    </div>
+    <a href="mailto:bariz.car@gmail.com" target="_blank">
+    <div class="card">
+      <i class="fas fa-envelope"></i>
+      <h3>Email</h3>
+      <p>bariz.car@gmail.com</p>
+    </div>
+    </a>
+    <a href="https://www.instagram.com/rami_r.ez/" target="_blank">
+    <div class="card">
+      <i class="fa-brands fa-square-instagram"></i>
+      <h3>Instagram</h3>
+      <p>@BARIZ_CAR</p>
+    </div>
+    </a>
+  </div>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6639.038152866971!2d-7.392315495689843!3d33.695514943881726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7b6f11d7e29a5%3A0x9a3d76b2ba1c3662!2sGare%20de%20Mohamm%C3%A9dia!5e0!3m2!1sfr!2sma!4v1761778144949!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+<footer>
+  <div class="footer-container">
+    
+    <!-- Logo + texte -->
+    <div class="footer-logo">
+      <img src="/assets/images/bariz-logo.png" alt="Logo">
+      <p>Des voitures d’exception, un service irréprochable.</p>
+    </div>
+
+    <!-- Menu -->
+    <div class="footer-menu">
+      <h3>Voitures</h3>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>📍 123 Rue Principale, Casablanca</p>
+      <p>📞 +212 6 00 00 00 00</p>
+      <p>✉️ contact@votresite.com</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    MADE WITH  PAIN <span>🖤</span> BY YASERDEV
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>  
+<script src="https://kit.fontawesome.com/97ff5bc4bb.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

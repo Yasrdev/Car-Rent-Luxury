@@ -1,0 +1,61 @@
+/* CSS */
+body{background-color: black;}
+/* Navbar simple */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: relative;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.burger {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Fullscreen menu */
+.fullscreen-menu {
+  position: fixed;
+  top: 100%; /* Commence en bas de l'écran */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px); /* effet flou */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: top 0.5s ease;
+  z-index: 100;
+}
+
+.fullscreen-menu ul {
+  list-style: none;
+  text-align: center;
+}
+
+.fullscreen-menu ul li {
+  margin: 1rem 0;
+}
+
+.fullscreen-menu ul li a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.fullscreen-menu ul li a:hover {
+  color: #ff0000;
+}
+
+/* Classe active pour afficher le menu */
+.fullscreen-menu.active {
+  top: 0;
+}

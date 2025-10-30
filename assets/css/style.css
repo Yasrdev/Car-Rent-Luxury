@@ -1,0 +1,664 @@
+  @font-face {
+  font-family: 'Mileast';
+  src: url('/assets/fonts/Mileast.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Historic';
+  src: url('/assetsfonts/Historic.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* Style global */
+body {
+  margin: 0;
+  font-family: Mileast, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: #030303;
+}
+
+/* Barre de navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 10px 40px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* effet du bordure en menu */
+.navbar.active {
+      border: 1px solid #666363; /* bordure rouge après scroll */
+      backdrop-filter: blur(10px);
+      box-sizing: border-box;   /* << important pour inclure padding et border dans le width */
+      margin: 0; 
+      align-items: center;
+      transition: 0.3s;
+      z-index: 100;
+    }
+
+#logo.active{
+  width: 70px;
+  height:70px;
+  transition: 0.3s;
+}
+    
+#logo{
+  width: 90px;
+  height:90px;
+}
+
+
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+
+.menu a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  font-size: 20px;
+}
+
+.menu a:hover {
+  color: #818181;
+  margin-right: 3px;
+}
+
+.burger{
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 101;
+}
+
+
+
+@media (max-width: 768px) {
+  .burger{
+    display: block;
+   
+  }
+  .menu{
+    display: none;
+  }
+}
+
+/* Fullscreen menu */
+.fullscreen-menu {
+  position: fixed;
+  top: 100%; /* Commence en bas de l'écran */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* Fond semi-transparent */
+  backdrop-filter: blur(7px); /* effet flou */
+  display: flex;
+  flex-direction: column; /* Arrange les enfants verticalement */
+  justify-content: center; /* Centre verticalement */
+  align-items: center;     /* Centre horizontalement */
+  transition: top 0.5s ease;
+  z-index: 5;
+}
+
+
+
+.fullscreen-menu ul {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.fullscreen-menu ul li {
+  margin: 1rem 0;
+}
+
+.fullscreen-menu ul li a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.3s;
+}
+
+.fullscreen-menu ul li a:hover {
+  color: #818181;
+}
+
+.fullscreen-menu .info-nav{
+  display: flex;
+  justify-content: center; /* centre les éléments horizontalement */
+  gap: 20px;               /* espace entre les éléments */
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.fullscreen-menu .info-nav i{
+  color: #ffffff;
+  margin: 5px 0;
+  font-size: 25px;
+}
+
+
+
+
+/* Classe active pour afficher le menu */
+.fullscreen-menu.active {
+  top: 0;
+}
+
+
+
+
+/* Section Accueil */
+.hero {
+  position: relative; /*Permet de positionner des éléments à l’intérieur (absolute par exemple) par rapport à .hero. */
+  height: 100vh; /*La hauteur de la section = 100% de la hauteur de la fenêtre (viewport).*/
+  display: flex; /*Active le Flexbox pour aligner facilement les enfants.*/
+  /*justify-content: center; /*Centre les éléments horizontalement dans la section.*/
+  align-items: center; /*Centre les éléments verticalement dans la section.*/
+  color: white;
+  text-align: left;
+  overflow: hidden;
+  /* flex-direction: column; */
+}
+
+/* Vidéo en arrière-plan */
+#bg-video {
+  position: absolute; /*Positionne la vidéo par rapport à son parent .hero*/
+  top: 0; /*Place la vidéo en haut à gauche de la section.*/
+  left: 0; /*Place la vidéo en haut à gauche de la section.*/
+  width: 100%; /*La vidéo remplit toute la section.*/
+  height: 100%;/*La vidéo remplit toute la section.*/
+  object-fit: cover; /*La vidéo est recadrée pour couvrir entièrement la section sans déformation, même si les proportions changent.*/
+  z-index: -1; /*La vidéo est derrière tout le contenu, car le contenu a un z-index plus élevé.*/
+}
+
+/* Contenu au-dessus de la vidéo */
+.hero-content {
+  z-index: 2; /*Assure que ce contenu reste au-dessus de la vidéo (z-index: -1).*/
+  max-width: 800px; /*Limite la largeur du contenu à 800px, pour que le texte ne soit pas trop étiré sur grand écran.*/
+}
+
+
+.hero-logo{
+  display: inline-block;
+  border: 1px solid rgb(139, 137, 137);
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 15px;
+  margin-bottom: 0; /* supprime l’espace en dessous */
+  font-family: Historic, sans-serif;
+  font-style: bold;
+}
+
+
+.hero-text{
+  padding: 20px 20px 0px 20px;
+}
+
+.hero-text h1{
+  font-size: 55px;
+}
+
+
+/* Boutons */
+.btn-group {
+  margin-top: 20px; /*Ajoute 20px d’espace au-dessus du groupe de boutons pour les séparer du titre ou texte.*/
+  padding: 10px;
+}
+
+.btn {
+  text-decoration: none; /*Supprime le soulignement par défaut des liens <a>.*/
+  padding: 12px 25px; /*Ajoute de l’espace à l’intérieur des boutons (haut/bas 12px, gauche/droite 25px).*/
+  border-radius: 5px;/*Rend les coins arrondis du bouton.*/
+  margin: 0 10px;/*Ajoute 10px d’espace horizontal entre les boutons.*/
+  font-weight: bold;/*Texte en gras.*/
+  transition: 0.3s; /*Animation fluide de 0,3 seconde quand le style change (ex : couleur au survol).*/
+
+}
+
+.btn i{
+  margin-left: 8px;
+  animation: bounce 1s infinite alternate;
+}
+
+/* Définition de l'animation */
+@keyframes bounce {
+  0% {
+    transform: translateX(0);  /* point de départ */
+  }
+  50% {
+    transform: translateX(5px); /* va à droite */
+  }
+  100% {
+    transform: translateX(0);  /* revient au point de départ */
+  }
+}
+
+.btn-primary {
+  background-color: #0303036b;
+  color: white;
+  border: 2px solid rgb(139, 137, 137);
+}
+
+.btn-primary:hover {
+  background-color: #030303;
+  border: 2px solid white;
+}
+
+.btn-secondary {
+  background-color: rgba(128, 128, 128, 0.356);
+  color: white;
+  border: 2px solid rgb(139, 137, 137);
+}
+
+.btn-secondary:hover {
+  background-color: rgb(128, 128, 128);
+  border: 2px solid white;
+}
+
+
+.defiler {
+  position: absolute; /* position absolue par rapport à .hero */
+  bottom: 0;          /* colle en bas de la section */
+  left: 0;
+  width: 100%;        /* prend toute la largeur de la section */
+  text-align: center;
+  padding: 20px;
+}
+
+.defiler img{
+  animation: bounceimg 1s infinite alternate;
+}
+
+
+@keyframes bounceimg {
+  0% {
+    transform: translateY(0);  /* position initiale */
+  }
+  50% {
+    transform: translateY(8px); /* descend de 8px */
+  }
+  100% {
+    transform: translateY(0);  /* revient en haut */
+  }
+}
+
+/* Section Car Swiper */
+.car-swiper {
+  padding: 80px 20px;
+  background-color: #0a0a0a;
+  color: #fff;
+}
+
+.Section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.Section-header h1 {
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #aaa;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.Section-header h2 {
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.swiper {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 40px;
+}
+
+.swiper-slide {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+}
+
+.swiper-slide:hover {
+  transform: translateY(-10px);
+}
+
+.slide-image {
+  height: 60%;
+  background-color: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-content {
+  padding: 25px;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.slide-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.slide-description {
+  color: #aaa;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slide-price {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.slide-button {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 8px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.slide-button:hover {
+  background-color: #ffffff36;
+  color: #ffffff;
+}
+
+.swiper-pagination {
+  position: relative;
+  margin-top: 20px;
+}
+
+.swiper-pagination-bullet {
+  background-color: #444;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #fff;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .swiper {
+      height: 450px;
+  }
+  
+  .swiper-header h2 {
+      font-size: 28px;
+  }
+  
+  .categories {
+      gap: 20px;
+  }
+  
+  .category {
+      font-size: 16px;
+  }
+  
+  .hero-text h1 {
+    font-size: 40px;
+  }
+  
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .btn {
+    text-align: center;
+    margin: 0;
+  }
+}
+
+/* Section Contact */
+
+ /* Section avec image de fond */
+  .Contact {
+    background-image: url('/assets/images/car.png') ;
+    backdrop-filter: blur(4px);
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px;
+    color: white;
+  }
+
+
+  /* Container des cards */
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+   .cards-container a{
+    text-decoration: none;
+    color: white;
+  }
+
+  /* Chaque card */
+  .card {
+    background: rgba(0, 0, 0, 0.253); /* transparent léger */
+    border: 2px solid gray;
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .card i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .card h3 {
+    margin: 10px 0;
+    font-size: 20px;
+  }
+
+  .card p {
+    font-size: 16px;
+  }
+
+  /* Map */
+  .map-container {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    border: 2px solid gray;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* footer style  */
+   footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 60px 20px 30px;
+    color: white;
+  }
+
+  /* Conteneur principal */
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 40px;
+    text-align: center;
+  }
+
+  /* Bloc logo */
+  .footer-logo {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .footer-logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo p {
+    color: #ccc;
+    font-size: 14px;
+  }
+
+  /* Bloc menu */
+  .footer-menu {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .footer-menu h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .footer-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-menu li {
+    margin-bottom: 10px;
+  }
+
+  .footer-menu a {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s;
+  }
+
+  .footer-menu a:hover {
+    color: #818181;
+  }
+
+  /* Bloc contact */
+  .footer-contact {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .footer-contact h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .footer-contact p {
+    margin: 5px 0;
+    color: #ccc;
+  }
+
+  /* Ligne "Made with love" */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #aaa;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+  }
+
+  .footer-bottom span {
+    color: #ff4d4d;
+  }
+
+
+
+
+
+
+  
