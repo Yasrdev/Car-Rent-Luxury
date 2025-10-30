@@ -42,7 +42,6 @@
     });
 
 
-
 //== afficher le menu en Mobile ==//
 const burger = document.getElementById('burger');
 const fullscreenMenu = document.getElementById('fullscreenMenu');
@@ -71,6 +70,29 @@ burger.addEventListener('click', () => {
         document.body.style.overflow = "auto";
       }, 1000);
     }, 3500);
+
+
+
+
+// Filter Custom Drop down
+// Change option selected
+const label = document.querySelector('.dropdown__filter-selected')
+const options = Array.from(document.querySelectorAll('.dropdown__select-option'))
+
+options.forEach((option) => {
+	option.addEventListener('click', () => {
+		label.textContent = option.textContent
+	})
+})
+
+
+
+
+
+
+
+
+    
 
 
 

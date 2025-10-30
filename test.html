@@ -1,175 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Effet d’entrée avec ligne centrée</title>
-  <style>
-    /* --- Style global --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    body, html {
-      height: 100%;
-      background: #111;
-      font-family: "Poppins", sans-serif;
-      overflow: hidden;
-    }
-
-    /* --- Loader --- */
-    #loader {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: #111;
-      color: #fff;
-      z-index: 9999;
-    }
-
-    /* Logo */
-    #loader img {
-      width: 120px;
-      height: auto;
-      opacity: 0;
-      transform: scale(0.8);
-      animation: fadeInZoom 1s ease forwards;
-    }
-
-    /* Ligne animée depuis le centre */
-    .line {
-      position: relative;
-      width: 200px; /* taille finale */
-      height: 2px;
-      margin: 25px 0;
-      background: transparent;
-      overflow: hidden;
-    }
-
-    .line::before,
-    .line::after {
-content: "";
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  background: #00ffff; /* couleur néon (cyan) */
-  box-shadow:
-    0 0 5px #00ffff,
-    0 0 10px #00ffff,
-    0 0 20px #00ffff,
-    0 0 40px #00ffff; /* effet néon */
-  transform: scaleX(0);
-  transform-origin: center;
-  animation: expandSide 1.5s ease forwards 1s;
-    }
-
-    .line::before {
-      left: 0;
-      transform-origin: right;
-    }
-
-    .line::after {
-      right: 0;
-      transform-origin: left;
-    }
-
-    /* Texte */
-    h3 {
-      font-size: 22px;
-      opacity: 0;
-      animation: fadeIn 1s ease 2.3s forwards;
-    }
-
-    /* --- Contenu du site --- */
-    #content {
-      display: none;
-      color: #111;
-      padding: 60px;
-      text-align: center;
-      background: #f4f4f4;
-      height: 100vh;
-    }
-
-    /* --- Animations --- */
-    @keyframes fadeInZoom {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes expandSide {
-      to {
-        transform: scaleX(1);
-      }
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes neonPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 5px #00ffff,
-      0 0 10px #00ffff,
-      0 0 20px #00ffff,
-      0 0 40px #00ffff;
-  }
-  50% {
-    box-shadow:
-      0 0 2px #00ffff,
-      0 0 5px #00ffff,
-      0 0 10px #00ffff,
-      0 0 20px #00ffff;
-  }
-}
-.line::before,
-.line::after {
-  animation:
-    expandSide 1.5s ease forwards 1s,
-    neonPulse 1.5s infinite alternate ease-in-out 2.5s; /* effet pulsant après */
-}
-  </style>
-</head>
-<body>
-
-  <!-- Loader -->
-  <div id="loader">
-    <img src="ton-logo.png" alt="Logo">
-    <div class="line"></div>
-    <h3>Bienvenue sur mon site</h3>
-  </div>
-
-  <!-- Contenu principal -->
-  <div id="content">
-    <h1>Page principale</h1>
-    <p>Voici ton contenu après le chargement.</p>
-  </div>
-
-  <script>
-    const loader = document.getElementById("loader");
-    const content = document.getElementById("content");
-
-    // Masquer le loader après quelques secondes
-    setTimeout(() => {
-      loader.style.opacity = "0";
-      loader.style.transition = "opacity 1s ease";
-      setTimeout(() => {
-        loader.style.display = "none";
-        content.style.display = "block";
-        document.body.style.overflow = "auto";
-      }, 1000);
-    }, 3500);
-  </script>
-
-</body>
-</html>
+<link rel="stylesheet" href="test.css">
+<div class="dropdown">
+	<input type="checkbox" class="dropdown__switch" id="filter-switch" hidden />
+	<label for="filter-switch" class="dropdown__options-filter">
+		<ul class="dropdown__filter" role="listbox" tabindex="-1">
+			<li class="dropdown__filter-selected" aria-selected="true">
+				Default option
+			</li>
+			<li>
+				<ul class="dropdown__select">
+					<li class="dropdown__select-option" role="option">
+						Option 1
+					</li>
+					<li class="dropdown__select-option" role="option">
+						Option 2
+					</li>
+					<li class="dropdown__select-option" role="option">
+						Option 3
+					</li>
+					<li class="dropdown__select-option" role="option">
+						Option 4
+					</li>
+					<li class="dropdown__select-option" role="option">
+						Option 5
+					</li>
+				</ul>
+			</li>
+		</ul>			
+	</label>
+</div>
+<script src="/assets/js/main.js"></script>
