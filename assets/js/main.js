@@ -29,8 +29,6 @@
   });
 
   //== Effet du bordure pour le menu ==//
-
-
   const navbar = document.querySelector('.navbar');
   const logo = document.getElementById('logo')
     window.addEventListener('scroll', () => {
@@ -59,12 +57,20 @@ burger.addEventListener('click', () => {
 });
 
 
+//== Loader au démarrage de la page ==//
+ const loader = document.getElementById("loader");
+    const content = document.getElementById("content");
 
-
-
-
-
-
+    // Masquer le loader après quelques secondes
+    setTimeout(() => {
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 1s ease";
+      setTimeout(() => {
+        loader.style.display = "none";
+        content.style.display = "block";
+        document.body.style.overflow = "auto";
+      }, 1000);
+    }, 3500);
 
 
 

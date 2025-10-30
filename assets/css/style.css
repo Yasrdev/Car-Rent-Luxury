@@ -12,7 +12,14 @@
   font-style: normal;
 }
 
-
+*{
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 /* Style global */
 body {
@@ -24,6 +31,132 @@ body {
   padding: 0;
   background-color: #030303;
 }
+
+
+/* Style du loader */
+/* --- Loader --- */
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #111;
+      color: #fff;
+      z-index: 9999;
+    }
+
+    #loader img,
+    #loader .line{
+      margin: 0; /* Supprime tout espace vertical */
+      padding: 0;
+    }
+    #loader h3 {
+      margin: 10px; /* Supprime tout espace vertical */
+      padding: 0;
+    }
+
+    /* Logo */
+    #loader img {
+      width: 120px;
+      height: auto;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeInZoom 1s ease forwards;
+    }
+
+    /* Ligne animée depuis le centre */
+    .line {
+      position: relative;
+      width: 200px; /* taille finale */
+      height: 2px;
+      margin: 25px 0;
+      background: transparent;
+      overflow: hidden;
+    }
+
+
+    .line::before,
+    .line::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      border-radius: 4px;
+      background: #ffffff; 
+      box-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #ffffff,
+        0 0 20px #ffffff,
+        0 0 40px #ffffff; 
+      transform: scaleX(0);
+      transform-origin: center;
+      animation: expandSide 1.5s ease forwards 1s;
+    }
+
+    .line::before {
+      left: 0;
+      transform-origin: right;
+    }
+
+    .line::after {
+      right: 0;
+      transform-origin: left;
+    }
+
+
+    /* --- Animations --- */
+    @keyframes fadeInZoom {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes expandSide {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes neonPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 5px #ffffff,
+          0 0 10px #ffffff,
+          0 0 20px #ffffff,
+          0 0 40px #ffffff;
+    }
+      50% {
+        box-shadow:
+          0 0 2px #ffffff,
+          0 0 5px #ffffff,
+          0 0 10px #ffffff,
+          0 0 20px #ffffff;
+    }
+  }
+
+.line::before,
+.line::after {
+  animation:
+    expandSide 1.5s ease forwards 1s,
+    neonPulse 1.5s infinite alternate ease-in-out 2.5s; /* effet pulsant après */
+}
+
+
+
+
+
+
+
+
 
 /* Barre de navigation */
 .navbar {
@@ -177,6 +310,123 @@ body {
 
 
 
+/* Section Accueil Cars page*/
+.hero-cars {
+  position: relative; /*Permet de positionner des éléments à l’intérieur (absolute par exemple) par rapport à .hero. */
+  height: 70vh; /*La hauteur de la section = 100% de la hauteur de la fenêtre (viewport).*/
+  display: flex; /*Active le Flexbox pour aligner facilement les enfants.*/
+  /*justify-content: center; /*Centre les éléments horizontalement dans la section.*/
+  align-items: center; /*Centre les éléments verticalement dans la section.*/
+  color: white;
+  text-align: left;
+  overflow: hidden;
+  /* flex-direction: column; */
+}
+
+.hero-cars-content {
+  z-index: 2; /*Assure que ce contenu reste au-dessus de la vidéo (z-index: -1).*/
+  max-width: 800px; /*Limite la largeur du contenu à 800px, pour que le texte ne soit pas trop étiré sur grand écran.*/
+}
+
+.hero-cars-text{
+  padding: 0px 20px 0px 40px;
+  max-width: 700px;
+}
+
+.hero-cars-text p{
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+#CarBackground {
+  position: absolute; /*Positionne la vidéo par rapport à son parent .hero*/
+  top: 0; /*Place la vidéo en haut à gauche de la section.*/
+  left: 0; /*Place la vidéo en haut à gauche de la section.*/
+  width: 100%; /*La vidéo remplit toute la section.*/
+  height: 100%;/*La vidéo remplit toute la section.*/
+  object-fit: cover; /*La vidéo est recadrée pour couvrir entièrement la section sans déformation, même si les proportions changent.*/
+  z-index: -1; /*La vidéo est derrière tout le contenu, car le contenu a un z-index plus élevé.*/
+}
+/* Overlay noir semi-transparent avec flou */
+.image-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* noir semi-transparent */
+  backdrop-filter: blur(5px); /* flou */
+}
+
+/* filter menu design cars page*/
+.filter-menu {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 20px 40px;
+  background-color: #0a0a0a;
+  align-items: center;
+}
+
+.collection h2{
+  color: white;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+.filter-options {
+  display: flex;
+  gap: 15px;
+}
+
+.filter-btn{
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+  font-family: Historic;
+}
+
+.filter-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.car-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px 40px;
+  background-color: #0a0a0a;
+}
+
+.car-card {
+  background-color: #1a1a1a;
+  overflow: hidden;
+  width: 300px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.car-card img {
+  width: 100%;
+  height: 60%;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.car-card .car-info {
+  padding: 15px 0px 0px 0px;
+  color: white;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+}
+
 /* Section Accueil */
 .hero {
   position: relative; /*Permet de positionner des éléments à l’intérieur (absolute par exemple) par rapport à .hero. */
@@ -188,6 +438,7 @@ body {
   text-align: left;
   overflow: hidden;
   /* flex-direction: column; */
+  
 }
 
 /* Vidéo en arrière-plan */
@@ -229,10 +480,15 @@ body {
 }
 
 
+
+
+
+
 /* Boutons */
 .btn-group {
-  margin-top: 20px; /*Ajoute 20px d’espace au-dessus du groupe de boutons pour les séparer du titre ou texte.*/
+  margin-top: 20px; 
   padding: 10px;
+
 }
 
 .btn {
@@ -242,7 +498,6 @@ body {
   margin: 0 10px;/*Ajoute 10px d’espace horizontal entre les boutons.*/
   font-weight: bold;/*Texte en gras.*/
   transition: 0.3s; /*Animation fluide de 0,3 seconde quand le style change (ex : couleur au survol).*/
-
 }
 
 .btn i{
