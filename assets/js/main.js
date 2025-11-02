@@ -39,6 +39,8 @@
         navbar.classList.remove('active');
         logo.classList.remove('active');
       }
+
+    console.log(navbar.classList);
     });
 
 
@@ -72,29 +74,117 @@ burger.addEventListener('click', () => {
     }, 3500);
 
 
+// Gestion de l'affichage de la card
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileDropdown = document.querySelector('.custom-dropdown-mobile');
+    const dropdownCard = document.querySelector('.custom-dropdown-card');
+    
+    mobileDropdown.addEventListener('click', function() {
+        dropdownCard.classList.toggle('show-card');
+        // Réinitialiser l'affichage des icônes quand la card s'ouvre
+        if (dropdownCard.classList.contains('show-card')) {
+            setTimeout(() => {
+                forceIconsDisplay();
+            }, 100);
+        }
+    });
+    
+    // Fermer la card en cliquant à l'extérieur
+    document.addEventListener('click', function(event) {
+        if (!mobileDropdown.contains(event.target) && !dropdownCard.contains(event.target)) {
+            dropdownCard.classList.remove('show-card');
+        }
+    });
+});
 
+// Fonction pour forcer l'affichage de toutes les icônes
+function forceIconsDisplay() {
+    const dropdowns = document.querySelectorAll('.custom-dropdown-card .custom-dropdown');
+    dropdowns.forEach(dropdown => {
+        const options = dropdown.querySelectorAll('ul li');
+        options.forEach(option => {
+            const icon = option.querySelector('i');
+            if (icon) {
+                icon.style.display = 'inline-block';
+                icon.style.opacity = '0.3'; // Icônes non sélectionnées en transparence
+            }
+        });
+        
+        // Première option en pleine opacité
+        const firstOption = options[0];
+        const firstIcon = firstOption.querySelector('i');
+        if (firstIcon) {
+            firstIcon.style.opacity = '1';
+        }
+    });
+}
 
 // Filter Custom Drop down
-// Change option selected
-const label = document.querySelector('.dropdown__filter-selected')
-const options = Array.from(document.querySelectorAll('.dropdown__select-option'))
+function initDropdown(dropdown) {
+    const label = dropdown.querySelector('label');
+    const options = dropdown.querySelectorAll('ul li');
+    const checkbox = dropdown.querySelector('input');
 
-options.forEach((option) => {
-	option.addEventListener('click', () => {
-		label.textContent = option.textContent
-	})
-})
+    // Vérifier si le dropdown a des options
+    if (options.length > 0 && label) {
+        // S'assurer que toutes les icônes sont visibles
+        options.forEach(option => {
+            const icon = option.querySelector('i');
+            if (icon) {
+                icon.style.display = 'inline-block';
+                icon.style.opacity = '0.3';
+            }
+        });
 
+        // Sélection par défaut : première option
+        const firstOption = options[0];
+        const firstIcon = firstOption.querySelector('i');
+        if (firstIcon) {
+            firstIcon.style.opacity = '1';
+        }
+        label.textContent = firstOption.childNodes[0].textContent.trim();
 
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                // Mettre à jour le label
+                label.textContent = option.childNodes[0].textContent.trim();
 
+                // Fermer le dropdown
+                checkbox.checked = false;
 
+                // Mettre à jour l'opacité des icônes
+                options.forEach(opt => {
+                    const optIcon = opt.querySelector('i');
+                    if (optIcon) {
+                        optIcon.style.opacity = '0.3';
+                    }
+                });
+                
+                // Icône sélectionnée en pleine opacité
+                const selectedIcon = option.querySelector('i');
+                if (selectedIcon) {
+                    selectedIcon.style.opacity = '1';
+                }
+            });
+        });
+    }
+}
 
+// Initialiser tous les dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.custom-dropdown').forEach(initDropdown);
+    // Forcer l'affichage initial des icônes
+    setTimeout(forceIconsDisplay, 500);
+});
 
-
-
-    
-
-
-
+// Fermer les dropdowns si clic à l'extérieur
+document.addEventListener('click', (event) => {
+    document.querySelectorAll('.custom-dropdown input').forEach(input => {
+        const dropdown = input.closest('.custom-dropdown');
+        if (!dropdown.contains(event.target)) {
+            input.checked = false;
+        }
+    });
+});
 
 

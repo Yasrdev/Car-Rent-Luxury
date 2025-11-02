@@ -1,32 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Filter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .drop-filter {
+            position: relative;
+        }
 
-<link rel="stylesheet" href="test.css">
-<div class="dropdown">
-	<input type="checkbox" class="dropdown__switch" id="filter-switch" hidden />
-	<label for="filter-switch" class="dropdown__options-filter">
-		<ul class="dropdown__filter" role="listbox" tabindex="-1">
-			<li class="dropdown__filter-selected" aria-selected="true">
-				Default option
-			</li>
-			<li>
-				<ul class="dropdown__select">
-					<li class="dropdown__select-option" role="option">
-						Option 1
-					</li>
-					<li class="dropdown__select-option" role="option">
-						Option 2
-					</li>
-					<li class="dropdown__select-option" role="option">
-						Option 3
-					</li>
-					<li class="dropdown__select-option" role="option">
-						Option 4
-					</li>
-					<li class="dropdown__select-option" role="option">
-						Option 5
-					</li>
-				</ul>
-			</li>
-		</ul>			
-	</label>
-</div>
-<script src="/assets/js/main.js"></script>
+        .custom-dropdown-mobile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+
+        .custom-dropdown-card {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 250px;
+        }
+
+        .custom-dropdown-card.show-card {
+            display: block;
+        }
+
+        .custom-dropdown {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .custom-dropdown input[type="checkbox"] {
+            display: none;
+        }
+
+        .dropdown-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .custom-dropdown label {
+            display: block;
+            padding: 8px 12px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .custom-dropdown label:after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+        }
+
+        .custom-dropdown input[type="checkbox"]:checked + .dropdown-title + label:after {
+            content: '▲';
+        }
+
+        .custom-dropdown ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            z-index: 1001;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .custom-dropdown input[type="checkbox"]:checked ~ ul {
+            display: block;
+        }
+
+        .custom-dropdown ul li {
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .custom-dropdown ul li:hover {
+            background: #f5f5f5;
+        }
+
+        .custom-dropdown ul li i {
+            font-size: 12px;
+            opacity: 0.3;
+        }
+
+        .custom-dropdownnn {
+            margin-top: 15px;
+        }
+
+        .filter-results button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-results button:hover {
+            background: #0056b3;
+        }
+
+        /* Styles pour le desktop */
+        @media (min-width: 768px) {
+            .custom-dropdown-mobile {
+                display: none;
+            }
+
+            .custom-dropdown-card {
+                display: flex;
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                gap: 20px;
+                align-items: flex-end;
+            }
+
+            .custom-dropdown {
+                margin-bottom: 0;
+            }
+
+            .custom-dropdown label {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="drop-filter">
+        <div class="custom-dropdown-mobile">
+            12<span>Resultats</span><i class="fa-solid fa-filter"></i>
+        </div>
+        <div class="custom-dropdown-card">
+            <!-- Dropdown 1 -->
+            <div class="custom-dropdown">
+                <input type="checkbox" id="dropdown-toggle">
+                <div class="dropdown-title">Categories :</div>
+                <label for="dropdown-toggle"></label>
+                <ul>
+                    <li>Tous <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 2 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 3 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 4 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 5 <i class="fa-solid fa-check drop-car"></i></li>
+                </ul>
+            </div>
+
+            <!-- Dropdown 2 -->
+            <div class="custom-dropdown custom-dropdown-2">
+                <input type="checkbox" id="dropdown-toggle-2">
+                <div class="dropdown-title">Categories :</div>
+                <label for="dropdown-toggle-2"></label>
+                <ul>
+                    <li>Tous <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 2 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 3 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 4 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 5 <i class="fa-solid fa-check drop-car"></i></li>
+                </ul>
+            </div>
+
+            <div class="custom-dropdownnn">
+                <div class="filter-results">
+                    <button>12<span>Resultats</span><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Gestion de l'affichage de la card mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileDropdown = document.querySelector('.custom-dropdown-mobile');
+            const dropdownCard = document.querySelector('.custom-dropdown-card');
+            
+            if (mobileDropdown) {
+                mobileDropdown.addEventListener('click', function() {
+                    dropdownCard.classList.toggle('show-card');
+                    // Réinitialiser l'affichage des icônes quand la card s'ouvre
+                    if (dropdownCard.classList.contains('show-card')) {
+                        setTimeout(() => {
+                            forceIconsDisplay();
+                        }, 100);
+                    }
+                });
+            }
+            
+            // Fermer la card en cliquant à l'extérieur (mobile seulement)
+            document.addEventListener('click', function(event) {
+                if (mobileDropdown && !mobileDropdown.contains(event.target) && !dropdownCard.contains(event.target)) {
+                    dropdownCard.classList.remove('show-card');
+                }
+            });
+
+            // Initialiser tous les dropdowns
+            initAllDropdowns();
+            
+            // Forcer l'affichage initial des icônes
+            setTimeout(forceIconsDisplay, 100);
+        });
+
+        // Fonction pour forcer l'affichage de toutes les icônes
+        function forceIconsDisplay() {
+            const dropdowns = document.querySelectorAll('.custom-dropdown');
+            dropdowns.forEach(dropdown => {
+                const options = dropdown.querySelectorAll('ul li');
+                options.forEach(option => {
+                    const icon = option.querySelector('i');
+                    if (icon) {
+                        icon.style.display = 'inline-block';
+                        icon.style.opacity = '0.3'; // Icônes non sélectionnées en transparence
+                    }
+                });
+                
+                // Première option en pleine opacité
+                const firstOption = options[0];
+                const firstIcon = firstOption.querySelector('i');
+                if (firstIcon) {
+                    firstIcon.style.opacity = '1';
+                }
+            });
+        }
+
+        // Fonction pour initialiser un dropdown
+        function initDropdown(dropdown) {
+            const label = dropdown.querySelector('label');
+            const options = dropdown.querySelectorAll('ul li');
+            const checkbox = dropdown.querySelector('input');
+
+            // Vérifier si le dropdown a des options
+            if (options.length > 0 && label) {
+                // S'assurer que toutes les icônes sont visibles
+                options.forEach(option => {
+                    const icon = option.querySelector('i');
+                    if (icon) {
+                        icon.style.display = 'inline-block';
+                        icon.style.opacity = '0.3';
+                    }
+                });
+
+                // Sélection par défaut : première option
+                const firstOption = options[0];
+                const firstIcon = firstOption.querySelector('i');
+                
+                // Extraire le texte de la première option (en ignorant les balises)
+                let firstOptionText = '';
+                firstOption.childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '') {
+                        firstOptionText = node.textContent.trim();
+                    }
+                });
+                
+                if (firstOptionText) {
+                    label.textContent = firstOptionText;
+                }
+                
+                if (firstIcon) {
+                    firstIcon.style.opacity = '1';
+                }
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Extraire le texte de l'option sélectionnée
+                        let selectedText = '';
+                        option.childNodes.forEach(node => {
+                            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '') {
+                                selectedText = node.textContent.trim();
+                            }
+                        });
+                        
+                        if (selectedText) {
+                            label.textContent = selectedText;
+                        }
+
+                        // Fermer le dropdown
+                        checkbox.checked = false;
+
+                        // Mettre à jour l'opacité des icônes
+                        options.forEach(opt => {
+                            const optIcon = opt.querySelector('i');
+                            if (optIcon) {
+                                optIcon.style.opacity = '0.3';
+                            }
+                        });
+                        
+                        // Icône sélectionnée en pleine opacité
+                        const selectedIcon = option.querySelector('i');
+                        if (selectedIcon) {
+                            selectedIcon.style.opacity = '1';
+                        }
+                    });
+                });
+            }
+        }
+
+        // Initialiser tous les dropdowns
+        function initAllDropdowns() {
+            document.querySelectorAll('.custom-dropdown').forEach(initDropdown);
+        }
+
+        // Fermer les dropdowns si clic à l'extérieur
+        document.addEventListener('click', (event) => {
+            document.querySelectorAll('.custom-dropdown input').forEach(input => {
+                const dropdown = input.closest('.custom-dropdown');
+                if (!dropdown.contains(event.target)) {
+                    input.checked = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

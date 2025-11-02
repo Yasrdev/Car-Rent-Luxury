@@ -8,17 +8,18 @@
     <!-- Favicon for modern browsers -->
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/fav-icon.png">
     <link rel="stylesheet" href="assets/css/style.css">
+     <!-- <link rel="stylesheet" href="test.css"> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-MrOqjI1F5K3kW8pQqTjGZpYz3rj4Zp3Hk8D5zHkgh3FZ8y5gTjZo3jK6F8F9K3G5G" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    
 </head>
 <body>
 <!-- Loader -->
-  <!-- <div id="loader">
+  <div id="loader">
     <img src="/assets/images/bariz-logo.png" alt="Logo">
     <div class="line"></div>
     <h3>Bienvenue sur mon site</h3>
-  </div> -->
+  </div>
 
 <div id="content">
 <!-- Navbar desktop (visible seulement sur desktop) -->
@@ -31,9 +32,9 @@
   </button>
   <ul class="menu" id="menu">
     <li><a href="index.html">Accueil</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">À propos</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="cars.html">Voitures</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="index.html#Contact" >Contact</a></li>
   </ul>
 </nav>
 <!-- Navbar Mobile (visible seulement sur mobile) -->
@@ -41,9 +42,9 @@
 <div class="fullscreen-menu" id="fullscreenMenu">
   <ul>
     <li><a href="index.html">Accueil</a></li>
-    <li><a href="#">Services</a></li>
-    <li><a href="#">À propos</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="cars.html">Voitures</a></li>
+    <li><a href="about.html">À propos</a></li>
+    <li><a href="index.html#Contact">Contact</a></li>
   </ul>
   <div class="info-nav">
     <i class="fa-brands fa-square-instagram"></i>
@@ -65,8 +66,42 @@
     </div>
   </section>
     <section class="drop-filter">
+        <div class="custom-dropdown-mobile">12<span>Resultats</span><i class="fa-solid fa-filter"></i></div>
+        <div class="custom-dropdown-card">
+            <!-- Dropdown 1 -->
+            <div class="custom-dropdown">
+              <div class="dropdown-title">Categories :</div>
+                <input type="checkbox" id="dropdown-toggle">
+                <label for="dropdown-toggle"></label>
+                <ul>
+                    <li>Tous <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 2 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 3 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 4 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 5 <i class="fa-solid fa-check drop-car"></i></li>
+                </ul>
+            </div>
 
-        <!-- drop down filter -->
+            <!-- Dropdown 2 -->
+            <div class="custom-dropdown custom-dropdown-2">
+              <div class="dropdown-title">Categories :</div>
+                <input type="checkbox" id="dropdown-toggle-2">
+                
+                <label for="dropdown-toggle-2"></label>
+                <ul>
+                    <li>Tous <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 2 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 3 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 4 <i class="fa-solid fa-check drop-car"></i></li>
+                    <li>Option 5 <i class="fa-solid fa-check drop-car"></i></li>
+                </ul>
+            </div>
+            <div class="custom-dropdownnn">
+                <div class="filter-results">
+                    <button>12<span>Resultats</span><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </div>
     </section>
   <section class="filter-menu">
     <div class="collection">
@@ -80,7 +115,7 @@
   </section>
 
   <section class="car-card-container">
-
+    
       <!-- Exemple de carte de voiture -->
       <div class="car-card" data-category="sports">
         <img src="/assets/images/mercedess.png" alt="Voiture Sportive 1">
