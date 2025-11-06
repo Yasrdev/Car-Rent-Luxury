@@ -161,7 +161,6 @@ body {
 
 
 
-
 /* Barre de navigation */
 .navbar {
   display: flex;
@@ -317,7 +316,7 @@ body {
 
 /* Section Accueil Cars page*/
 .hero-cars {
-  position: relative; /*Permet de positionner des éléments à l’intérieur (absolute par exemple) par rapport à .hero. */
+  position: relative; /*Permet de positionner des éléments à l'intérieur (absolute par exemple) par rapport à .hero. */
   height: 50vh; /*La hauteur de la section = 100% de la hauteur de la fenêtre (viewport).*/
   display: flex; /*Active le Flexbox pour aligner facilement les enfants.*/
   /*justify-content: center; /*Centre les éléments horizontalement dans la section.*/
@@ -326,6 +325,90 @@ body {
   text-align: left;
   overflow: hidden;
   /* flex-direction: column; */
+}
+
+.hero-cars-details{
+  bottom: 0;
+  position: relative; /*Permet de positionner des éléments à l'intérieur (absolute par exemple) par rapport à .hero. */
+  height: 60vh; /*La hauteur de la section = 100% de la hauteur de la fenêtre (viewport).*/
+  display: flex; /*Active le Flexbox pour aligner facilement les enfants.*/
+  color: white;
+  text-align: left;
+  overflow: hidden;
+  /* flex-direction: column; */
+
+}
+
+
+.hero-cars-details-content {
+  bottom: 22%;
+  left: 3%;
+  position: absolute;
+  z-index: 2; /*Assure que ce contenu reste au-dessus de la vidéo (z-index: -1).*/
+  max-width: 800px; /*Limite la largeur du contenu à 800px, pour que le texte ne soit pas trop étiré sur grand écran.*/
+}
+
+.hero-cars-details-text{
+  
+  max-width: 500px;
+}
+
+.hero-cars-overlay{
+  display: inline-block;
+  border: 1px solid rgb(255, 252, 252);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+  margin-bottom: 0; /* supprime l'espace en dessous */
+  font-style: bold;
+  background-color: #818181;
+  margin-top: 10px;
+}
+
+.hero-cars-details-text h1{
+  font-size: 45px;
+
+}
+
+.hero-cars-details-text p{
+  font-size: 20px;
+  padding-top: 20px;
+  line-height: 1.6;
+}
+
+
+
+
+.retour-btn{
+  position: absolute;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 8px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  top: 30%;
+  left: 1%;
+  display: flex;                /* place l'image et le texte sur la même ligne */
+  align-items: center;          /* centre verticalement */
+  justify-content: center;  
+  gap: 10px;    
+}
+
+.retour-btn span{
+  font-size:16px ;
+  
+}
+
+.retour-btn:hover {
+    transform: translateX(-5px);
+    background-color: #aaaaaa4f;
+  }
+
+.retour-btn img{
+  height: 16px;
+  width: 16px;
+  
 }
 
 .hero-cars-content {
@@ -349,6 +432,46 @@ body {
   line-height: 1.6;
 }
 
+
+
+.smoke-effect {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 450px; /* Ajustez la hauteur de l'effet fumée */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.5) 30%,
+        rgba(0, 0, 0, 0.3) 60%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+}
+
+/* Version avec effet plus réaliste de fumée */
+.smoke-effect-realistic {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 25%,
+        rgba(0, 0, 0, 0.95) 40%,
+        rgba(0, 0, 0, 0.85) 60%,
+        rgba(0, 0, 0, 0.7) 80%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    pointer-events: none;
+}
+
+
+
+
 #CarBackground {
   position: absolute; /*Positionne la vidéo par rapport à son parent .hero*/
   top: 0; /*Place la vidéo en haut à gauche de la section.*/
@@ -358,6 +481,9 @@ body {
   object-fit: cover; /*La vidéo est recadrée pour couvrir entièrement la section sans déformation, même si les proportions changent.*/
   z-index: -1; /*La vidéo est derrière tout le contenu, car le contenu a un z-index plus élevé.*/
 }
+
+
+
 /* Overlay noir semi-transparent avec flou */
 .image-container::after {
   content: "";
@@ -505,7 +631,6 @@ display: none;
 
 
 
-
 /* filter radio*/
 .filter-menu {
   display: flex;
@@ -555,11 +680,29 @@ display: none;
 }
 
 .car-card {
-  background-color: transparent;
-  overflow: hidden;
-  width: 310px;
-  height: 310px;
-  transition: transform 0.3s;
+    position: relative; /* ESSENTIEL pour positionner le car-status */
+    display: relative;
+    background-color: transparent;
+    overflow: hidden;
+    width: 310px;
+    height: 310px;
+    transition: transform 0.3s;
+}
+
+/* CORRECTION DEFINITIVE DU CAR-STATUS */
+.car-card .car-status {
+  position: absolute;
+  display: block;
+  top: 10px;
+  right: 10px;
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border: 1px solid rgb(139, 137, 137);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 1;
+  
 }
 
 
@@ -569,12 +712,13 @@ display: none;
   height: 80%;
   border-radius: 10px;
   object-fit: cover;
-
 }
 
 .car-card .car-info {
   padding: 15px 0px 0px 0px;
   color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .car-card:hover {
@@ -583,7 +727,7 @@ display: none;
 
 /* Section Accueil */
 .hero {
-  position: relative; /*Permet de positionner des éléments à l’intérieur (absolute par exemple) par rapport à .hero. */
+  position: relative; /*Permet de positionner des éléments à l'intérieur (absolute par exemple) par rapport à .hero. */
   height: 100vh; /*La hauteur de la section = 100% de la hauteur de la fenêtre (viewport).*/
   display: flex; /*Active le Flexbox pour aligner facilement les enfants.*/
   /*justify-content: center; /*Centre les éléments horizontalement dans la section.*/
@@ -619,7 +763,7 @@ display: none;
   border-radius: 2px;
   padding: 5px;
   font-size: 15px;
-  margin-bottom: 0; /* supprime l’espace en dessous */
+  margin-bottom: 0; /* supprime l'espace en dessous */
   font-family: Historic, sans-serif;
   font-style: bold;
 }
@@ -637,7 +781,6 @@ display: none;
 
 
 
-
 /* Boutons */
 .btn-group {
   margin-top: 20px; 
@@ -647,9 +790,9 @@ display: none;
 
 .btn {
   text-decoration: none; /*Supprime le soulignement par défaut des liens <a>.*/
-  padding: 12px 25px; /*Ajoute de l’espace à l’intérieur des boutons (haut/bas 12px, gauche/droite 25px).*/
+  padding: 12px 25px; /*Ajoute de l'espace à l'intérieur des boutons (haut/bas 12px, gauche/droite 25px).*/
   border-radius: 5px;/*Rend les coins arrondis du bouton.*/
-  margin: 0 10px;/*Ajoute 10px d’espace horizontal entre les boutons.*/
+  margin: 0 10px;/*Ajoute 10px d'espace horizontal entre les boutons.*/
   font-weight: bold;/*Texte en gras.*/
   transition: 0.3s; /*Animation fluide de 0,3 seconde quand le style change (ex : couleur au survol).*/
 }
@@ -846,6 +989,10 @@ display: none;
   font-size: 14px;
 }
 
+.slide-button a{
+   color: #fff;
+}
+
 .slide-button:hover {
   background-color: #ffffff36;
   color: #ffffff;
@@ -964,7 +1111,7 @@ display: none;
   /* Section Accueil About page*/
 .hero-about {
   position: relative;
-  padding: 15% 5% 5%;
+  padding: 10% 5% 5%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -997,11 +1144,9 @@ display: none;
 
 .Section-header-about h4 {
   letter-spacing: 3px;
-  color: #9e9b9b;
+  color: #000000;
   text-shadow: 
-    0 0 5px #ffffff,
-    0 0 10px #ffffff,
-    0 0 15px #ffffff;
+    0 0 10px #ffffff;
   font-size: 14px;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -1025,8 +1170,7 @@ display: none;
       0 0 0px #fff,
       0 0 5px #fff,
       0 0 10px #ffffff,
-      0 0 15px #ffffff,
-      0 0 20px #ffffff;
+      0 0 15px #ffffff;
   }
 
 }
@@ -1056,7 +1200,6 @@ display: none;
   max-width: 800px;
   margin: 0 auto;
 }
-
 
 
 
@@ -1169,7 +1312,7 @@ display: none;
 }
 
 .hero-about {
-    padding: 25% 5% 10%;
+    padding: 28% 5% 10%;
     min-height: auto;
     background-attachment: scroll; /* Remove parallax on mobile for performance */
   }
@@ -1558,7 +1701,447 @@ justify-content: center;
   }
 }
 
+/* Container principal pour la galerie et le contact */
+.gallery-and-contact-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  justify-content: center; /* Centrer le contenu */
+  align-items: flex-start; /* Aligner en haut */
+}
 
+/* Section Contactez-nous pour les prix */
+.contact-pricing-sidebar {
+  flex: 0 0 350px;
+  position: sticky;
+  top: 120px; /* Position en dessous de la navbar */
+  align-self: flex-start;
+  height: fit-content;
+  margin-top: 60px;
+}
 
+.pricing-card {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgb(139, 137, 137);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
 
+.pricing-card h3 {
+  color: white;
+  font-size: 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
 
+.contact-info {
+  color: white;
+}
+
+.contact-person h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.contact-person .role {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.contact-details p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.contact-details i {
+  width: 20px;
+  color: #818181;
+}
+
+.finance-options {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(139, 137, 137);
+  font-size: 15px;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+/* Ajustement de la galerie pour partager l'espace */
+.gallery-page {
+  flex: 1;
+  max-width: 900px; /* Limiter la largeur maximale */
+  margin: 0 auto; /* Centrer la galerie */
+}
+
+/* === Gallery Page Styles - Intégration avec le thème global === */
+.gallery-page {
+  background-color: #030303;
+  padding: 60px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer le contenu de la galerie */
+}
+
+.gallery-container-main {
+  max-width: 1200px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  border: 1px solid rgb(139, 137, 137);
+  backdrop-filter: blur(10px);
+}
+
+.gallery-content {
+  padding: 40px;
+  position: relative;
+}
+
+.gallery-main-image {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgb(139, 137, 137);
+  /* Supprimer les effets d'ombre et de transition */
+  box-shadow: none;
+  transition: none;
+}
+
+.gallery-image-display {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Supprimer la transition */
+  transition: none;
+}
+
+.gallery-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  border: 1px solid rgb(139, 137, 137);
+  font-family: Mileast, sans-serif;
+}
+
+.gallery-navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  padding: 0 20px;
+}
+
+.gallery-nav-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: #030303;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgb(139, 137, 137);
+  /* Supprimer les effets de transition et d'ombre */
+  box-shadow: none;
+  transition: none;
+  font-size: 1.2rem;
+}
+
+.gallery-nav-btn:hover {
+  background: white;
+  /* Supprimer les effets de transformation */
+  transform: none;
+  box-shadow: none;
+}
+
+.gallery-nav-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gallery-nav-btn.disabled:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.gallery-thumbnail-container {
+  position: relative;
+  padding: 0 40px;
+}
+
+.gallery-thumbnail-swiper {
+  height: 120px;
+}
+
+.gallery-thumb-slide {
+  width: 150px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  /* Supprimer les effets de transition et d'ombre */
+  box-shadow: none;
+  transition: none;
+}
+
+.gallery-thumb-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-thumb-slide-active {
+  opacity: 1;
+  border: 3px solid #ffffff;
+  /* Supprimer les effets de transformation et d'ombre */
+  transform: none;
+  box-shadow: none;
+}
+
+.gallery-pagination {
+  position: relative;
+  margin-top: 25px;
+}
+
+.gallery-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #666363;
+  opacity: 1;
+  /* Supprimer la transition */
+  transition: none;
+}
+
+.gallery-pagination-bullet-active {
+  background: #ffffff;
+  /* Supprimer les effets de transformation et d'ombre */
+  transform: none;
+  box-shadow: none;
+}
+
+/* Supprimer l'animation pour le changement d'image */
+.gallery-image-display {
+  transition: none;
+}
+
+/* Spécifications - Centrage */
+.Spécifications {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
+  width: 100%;
+}
+
+.Spécifications h3 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #ffffff;
+  width: 100%;
+  text-align: center; /* Centrer le titre */
+}
+
+/* Conteneur grid pour l'affichage 2x2 */
+.spécifications-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 1000px; /* Limiter la largeur */
+  margin: 0 auto; /* Centrer le conteneur */
+}
+
+/* Chaque div spécification avec sa propre bordure */
+.spécifications-container > div {
+  border: 1px solid #ffffff49;
+  border-radius: 10px;
+  padding: 25px;
+  background-color: transparent;
+  /* Supprimer les effets de transition */
+  transition: none;
+  box-shadow: none;
+}
+
+.spécifications-container > div:hover {
+  /* Supprimer les effets au survol */
+  border-color: #ffffff49;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Ligne icône + titre */
+.spécifications-container > div .fa-solid {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.spécifications-container > div h4 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.spécifications-container > div p {
+  margin: 20px 0 0 0;
+  color: #ffffff93;
+  line-height: 1.6;
+  font-size: 16px;
+  padding-left: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .gallery-and-contact-container {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Centrer les éléments en colonne */
+  }
+  
+  .contact-pricing-sidebar {
+    flex: 1;
+    position: static;
+    margin-top: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .gallery-page {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-and-contact-container {
+    padding: 0 15px;
+  }
+  
+  .pricing-card {
+    padding: 20px;
+  }
+  
+  .pricing-card h3 {
+    font-size: 20px;
+  }
+  
+  .contact-details p {
+    font-size: 15px;
+  }
+  
+  .gallery-content {
+    padding: 20px;
+  }
+  
+  .gallery-main-image {
+    height: 300px;
+  }
+  
+  .gallery-thumbnail-container {
+    padding: 0 20px;
+  }
+  
+  .gallery-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .gallery-thumbnail-swiper {
+    height: 100px;
+  }
+  
+  .gallery-thumb-slide {
+    width: 120px;
+    height: 80px;
+  }
+  
+  /* Spécifications en une colonne sur mobile */
+  .spécifications-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 100%;
+  }
+  
+  .spécifications-container > div {
+    padding: 20px;
+  }
+  
+  .spécifications-container > div .fa-solid {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+  
+  .spécifications-container > div h4 {
+    font-size: 18px;
+  }
+  
+  .spécifications-container > div p {
+    font-size: 15px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-page {
+    padding: 30px 10px;
+  }
+  
+  .gallery-main-image {
+    height: 250px;
+  }
+  
+  .gallery-thumbnail-swiper {
+    height: 80px;
+  }
+  
+  .gallery-thumb-slide {
+    width: 100px;
+    height: 70px;
+  }
+  
+  .gallery-navigation {
+    padding: 0 10px;
+  }
+  
+  .gallery-nav-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .gallery-counter {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}

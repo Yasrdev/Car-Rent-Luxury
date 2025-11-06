@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <!-- Favicon for modern browsers -->
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/fav-icon.png">
-    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-MrOqjI1F5K3kW8pQqTjGZpYz3rj4Zp3Hk8D5zHkgh3FZ8y5gTjZo3jK6F8F9K3G5G" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 <!-- Loader -->
@@ -66,83 +67,78 @@
   </section>
 
   <div class="gallery-and-contact-container">
-    <section class="gallery-page">
-      <div class="Section-header">
-        <h1>GALERIE PHOTOS</h1>
-        <h2>Découvrez les Détails</h2>
+ <section class="gallery-page">
+  <div class="gallery-container-main">
+    <div class="gallery-content">
+      <div class="gallery-main-image">
+        <img id="galleryMainImage" class="gallery-image-display" src="/assets/images/car-1.png" alt="Voiture de luxe">
+        <div class="gallery-counter">
+          <span id="galleryCurrentImage">1</span> / <span id="galleryTotalImages">5</span>
+        </div>
+        
+        <div class="gallery-navigation">
+          <div id="galleryPrevBtn" class="gallery-nav-btn disabled">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div id="galleryNextBtn" class="gallery-nav-btn">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+        </div>
       </div>
       
-      <div class="gallery-container-main">
-        <div class="gallery-content">
-          <div class="gallery-main-image">
-            <img id="galleryMainImage" class="gallery-image-display" src="/assets/images/car-1.png" alt="Voiture de luxe">
-            <div class="gallery-counter">
-              <span id="galleryCurrentImage">1</span> / <span id="galleryTotalImages">5</span>
+      <div class="gallery-thumbnail-container">
+        <div class="swiper gallery-thumbnail-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide gallery-thumb-slide gallery-thumb-slide-active" data-image="/assets/images/car-1.png" data-index="0">
+              <img src="/assets/images/car-1.png" alt="Voiture 1">
             </div>
-            
-            <div class="gallery-navigation">
-              <div id="galleryPrevBtn" class="gallery-nav-btn disabled">
-                <i class="fas fa-chevron-left"></i>
-              </div>
-              <div id="galleryNextBtn" class="gallery-nav-btn">
-                <i class="fas fa-chevron-right"></i>
-              </div>
+            <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="1">
+              <img src="/assets/images/car-1.png" alt="Voiture 2">
+            </div>
+            <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="2">
+              <img src="/assets/images/car-1.png" alt="Voiture 3">
+            </div>
+            <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="3">
+              <img src="/assets/images/car-1.png" alt="Voiture 4">
+            </div>
+            <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="4">
+              <img src="/assets/images/car-1.png" alt="Voiture 5">
             </div>
           </div>
           
-          <div class="gallery-thumbnail-container">
-            <div class="swiper gallery-thumbnail-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide gallery-thumb-slide gallery-thumb-slide-active" data-image="/assets/images/car-1.png" data-index="0">
-                  <img src="/assets/images/car-1.png" alt="Voiture 1">
-                </div>
-                <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="1">
-                  <img src="/assets/images/car-1.png" alt="Voiture 2">
-                </div>
-                <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="2">
-                  <img src="/assets/images/car-1.png" alt="Voiture 3">
-                </div>
-                <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="3">
-                  <img src="/assets/images/car-1.png" alt="Voiture 4">
-                </div>
-                <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="4">
-                  <img src="/assets/images/car-1.png" alt="Voiture 5">
-                </div>
-              </div>
-              
-              <div class="swiper-pagination gallery-pagination"></div>
-            </div>
-          </div>
+          <div class="swiper-pagination gallery-pagination"></div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="Spécifications">
-        <h3>Spécifications Techniques</h3>
-        <div class="spécifications-container">
-          <div class="moteur">
+<div class="Spécifications">
+    <h3>Spécifications Techniques</h3>
+    <div class="spécifications-container">
+        <div class="moteur">
             <i class="fa-solid fa-bolt"></i>
             <h4>Moteur</h4>
             <p>2.5L Turbocharged 5-cylinder</p>
-          </div>
-          <div class="Puissance">
+        </div>
+        <div class="Puissance">
             <i class="fa-solid fa-gauge-high"></i>
             <h4>Puissance</h4>
             <p>400 chevaux</p>
-          </div>
-          <div class="Accélération">
+        </div>
+        <div class="Accélération">
             <i class="fa-solid fa-gauge"></i>
             <h4>Accélération</h4>
             <p>0-100 km/h en 3.9s</p>
-          </div>
-          <div class="Vitesse Max">
+        </div>
+        <div class="Vitesse Max">
             <i class="fa-solid fa-gauge-high"></i>
             <h4>Vitesse Max</h4>
             <p>250 km/h</p>
-          </div>
         </div>
-      </div>
-    </section>
-    
+    </div>
+</div>
+</section>
+
     <!-- Section Contactez-nous pour les prix -->
     <aside class="contact-pricing-sidebar">
       <div class="pricing-card">
@@ -162,26 +158,24 @@
         </div>
       </div>
     </aside>
-  </div>
 </div>
-
 <footer>
   <div class="footer-container">
     
     <!-- Logo + texte -->
     <div class="footer-logo">
       <img src="/assets/images/bariz-logo.png" alt="Logo">
-      <p>Des voitures d'exception, un service irréprochable.</p>
+      <p>Des voitures d’exception, un service irréprochable.</p>
     </div>
 
     <!-- Menu -->
     <div class="footer-menu">
       <h3>Voitures</h3>
       <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="about.html">À propos</a></li>
-        <li><a href="cars.html">Services</a></li>
-        <li><a href="#Contact">Contact</a></li>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
       </ul>
     </div>
 
@@ -202,5 +196,6 @@
 <script src="assets/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>  
 <script src="https://kit.fontawesome.com/97ff5bc4bb.js" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -188,3 +188,152 @@ document.addEventListener('click', (event) => {
 });
 
 
+
+// car details gellery 
+
+// Gallery functionality
+function initGallery() {
+  const galleryImages = [
+    {
+      main: "/assets/images/car-1.png",
+      thumb: "/assets/images/car-1.png"
+    },
+    {
+      main: "/assets/images/car-1.png",
+      thumb: "/assets/images/car-1.png"
+    },
+    {
+      main: "/assets/images/car-1.png",
+      thumb: "/assets/images/car-1.png"
+    },
+    {
+      main: "/assets/images/car-1.png",
+      thumb: "/assets/images/car-1.png"
+    },
+    {
+      main: "/assets/images/car-1.png",
+      thumb: "/assets/images/car-1.png"
+    }
+  ];
+  
+  let galleryCurrentIndex = 0;
+  const galleryTotalImages = galleryImages.length;
+  
+  const galleryMainImage = document.getElementById('galleryMainImage');
+  const galleryCurrentImageSpan = document.getElementById('galleryCurrentImage');
+  const galleryTotalImagesSpan = document.getElementById('galleryTotalImages');
+  const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+  const galleryNextBtn = document.getElementById('galleryNextBtn');
+  const thumbSlides = document.querySelectorAll('.gallery-thumb-slide');
+  
+  // Initialiser le compteur
+  galleryTotalImagesSpan.textContent = galleryTotalImages;
+  updateGalleryCounter();
+  
+  // Initialiser Swiper pour les miniatures
+  const galleryThumbnailSwiper = new Swiper('.gallery-thumbnail-swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 15,
+    centeredSlides: true,
+    loop: false,
+    pagination: {
+      el: '.gallery-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 15,
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+  });
+  
+  // Mettre à jour l'image principale et le swiper
+  function updateGalleryMainImage(index) {
+    galleryCurrentIndex = index;
+    
+    // Animation de fondu
+    galleryMainImage.style.opacity = '0';
+    
+    setTimeout(() => {
+      galleryMainImage.src = galleryImages[galleryCurrentIndex].main;
+      galleryMainImage.style.opacity = '1';
+      updateGalleryCounter();
+      updateGalleryButtons();
+      updateActiveThumb();
+      
+      // Mettre à jour le swiper
+      galleryThumbnailSwiper.slideTo(galleryCurrentIndex);
+    }, 200);
+  }
+  
+  // Mettre à jour le compteur
+  function updateGalleryCounter() {
+    galleryCurrentImageSpan.textContent = galleryCurrentIndex + 1;
+  }
+  
+  // Mettre à jour l'état des boutons
+  function updateGalleryButtons() {
+    galleryPrevBtn.classList.toggle('disabled', galleryCurrentIndex === 0);
+    galleryNextBtn.classList.toggle('disabled', galleryCurrentIndex === galleryTotalImages - 1);
+  }
+  
+  // Mettre à jour la miniature active
+  function updateActiveThumb() {
+    thumbSlides.forEach((slide, index) => {
+      if (index === galleryCurrentIndex) {
+        slide.classList.add('gallery-thumb-slide-active');
+      } else {
+        slide.classList.remove('gallery-thumb-slide-active');
+      }
+    });
+  }
+  
+  // Événements pour les boutons de navigation
+  galleryPrevBtn.addEventListener('click', function() {
+    if (galleryCurrentIndex > 0) {
+      updateGalleryMainImage(galleryCurrentIndex - 1);
+    }
+  });
+  
+  galleryNextBtn.addEventListener('click', function() {
+    if (galleryCurrentIndex < galleryTotalImages - 1) {
+      updateGalleryMainImage(galleryCurrentIndex + 1);
+    }
+  });
+  
+  // Mettre à jour l'image principale lorsqu'on clique sur une miniature
+  thumbSlides.forEach((slide, index) => {
+    slide.addEventListener('click', function() {
+      updateGalleryMainImage(index);
+    });
+  });
+  
+  // Mettre à jour l'image principale lorsqu'on change de slide dans le swiper
+  galleryThumbnailSwiper.on('slideChange', function() {
+    const activeIndex = galleryThumbnailSwiper.activeIndex;
+    updateGalleryMainImage(activeIndex);
+  });
+  
+  // Initialisation
+  updateGalleryButtons();
+  updateActiveThumb();
+}
+
+// Appeler la fonction d'initialisation de la galerie
+document.addEventListener('DOMContentLoaded', function() {
+  // ... votre code existant ...
+  
+  // Initialiser la galerie si on est sur la page car-details
+  if (document.querySelector('.gallery-page')) {
+    initGallery();
+  }
+});
