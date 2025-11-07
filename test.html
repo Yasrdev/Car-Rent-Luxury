@@ -3,1531 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BARIZ CARS - Détails Véhicule</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/fav-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Réservation de Voiture</title>
     <style>
-      /* === STYLES GÉNÉRAUX === */
-@font-face {
-    font-family: 'Mileast';
-    src: url('/assets/fonts/Mileast.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Historic';
-    src: url('/assetsfonts/Historic.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-* {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    text-decoration: none;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-body {
-    margin: 0;
-    font-family: Mileast, sans-serif;
-    overflow-x: hidden;
-    position: relative;
-    background-color: #030303;
-    color: white;
-}
-
-/* === LOADER === */
-#loader {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #111;
-    color: #fff;
-    z-index: 9999;
-}
-
-#loader img,
-#loader .line {
-    margin: 0;
-    padding: 0;
-}
-
-#loader h3 {
-    margin: 10px;
-    padding: 0;
-}
-
-#loader img {
-    width: 120px;
-    height: auto;
-    opacity: 0;
-    transform: scale(0.8);
-    animation: fadeInZoom 1s ease forwards;
-}
-
-.line {
-    position: relative;
-    width: 200px;
-    height: 2px;
-    margin: 25px 0;
-    background: transparent;
-    overflow: hidden;
-}
-
-.line::before,
-.line::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 50%;
-    border-radius: 4px;
-    background: #ffffff;
-    box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff;
-    transform: scaleX(0);
-    transform-origin: center;
-    animation: expandSide 1.5s ease forwards 1s, neonPulse 1.5s infinite alternate ease-in-out 2.5s;
-}
-
-.line::before {
-    left: 0;
-    transform-origin: right;
-}
-
-.line::after {
-    right: 0;
-    transform-origin: left;
-}
-
-@keyframes fadeInZoom {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes expandSide {
-    to {
-        transform: scaleX(1);
-    }
-}
-
-@keyframes neonPulse {
-    0%, 100% {
-        box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff;
-    }
-    50% {
-        box-shadow: 0 0 2px #ffffff, 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
-    }
-}
-
-/* === NAVBAR === */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
-    padding: 10px 40px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-    box-sizing: border-box;
-}
-
-.navbar.active {
-    border: 1px solid #666363;
-    backdrop-filter: blur(10px);
-    box-sizing: border-box;
-    margin: 0;
-    align-items: center;
-    transition: 0.3s;
-    z-index: 100;
-}
-
-#logo.active {
-    width: 70px;
-    height: 70px;
-    transition: 0.3s;
-}
-
-#logo {
-    width: 90px;
-    height: 90px;
-}
-
-.menu {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.menu a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-    font-size: 20px;
-}
-
-.menu a:hover {
-    color: #818181;
-    margin-right: 3px;
-}
-
-.burger {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 28px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    z-index: 101;
-}
-
-/* === MENU PLEIN ÉCRAN === */
-.fullscreen-menu {
-    position: fixed;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0);
-    backdrop-filter: blur(7px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: top 0.5s ease;
-    z-index: 5;
-}
-
-.fullscreen-menu ul {
-    list-style: none;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.fullscreen-menu ul li {
-    margin: 1rem 0;
-}
-
-.fullscreen-menu ul li a {
-    font-size: 2rem;
-    text-decoration: none;
-    color: #ffffff;
-    transition: color 0.3s;
-}
-
-.fullscreen-menu ul li a:hover {
-    color: #818181;
-}
-
-.fullscreen-menu .info-nav {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    position: absolute;
-    bottom: 30px;
-    left: 0;
-    width: 100%;
-    text-align: center;
-}
-
-.fullscreen-menu .info-nav i {
-    color: #ffffff;
-    margin: 5px 0;
-    font-size: 25px;
-}
-
-.fullscreen-menu .info-nav i:hover {
-    color: #818181;
-}
-
-.fullscreen-menu.active {
-    top: 0;
-}
-
-/* === SECTION HERO CAR DETAILS === */
-.hero-cars-details {
-    position: relative;
-    height: 60vh;
-    display: flex;
-    color: white;
-    text-align: left;
-    overflow: hidden;
-}
-
-.hero-cars-details-content {
-    bottom: 22%;
-    left: 3%;
-    position: absolute;
-    z-index: 2;
-    max-width: 800px;
-}
-
-.hero-cars-details-text {
-    max-width: 500px;
-}
-
-.hero-cars-overlay {
-    display: inline-block;
-    border: 1px solid rgb(255, 252, 252);
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 15px;
-    margin-bottom: 0;
-    font-style: bold;
-    background-color: #818181;
-    margin-top: 10px;
-}
-
-.hero-cars-details-text h1 {
-    font-size: 45px;
-}
-
-.hero-cars-details-text p {
-    font-size: 20px;
-    padding-top: 20px;
-    line-height: 1.6;
-}
-
-.retour-btn {
-    position: absolute;
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-    padding: 8px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    top: 30%;
-    left: 1%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.retour-btn span {
-    font-size: 16px;
-}
-
-.retour-btn:hover {
-    transform: translateX(-5px);
-    background-color: #aaaaaa4f;
-}
-
-.retour-btn img {
-    height: 16px;
-    width: 16px;
-}
-
-.smoke-effect-realistic {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 250px;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 1) 0%,
-        rgba(0, 0, 0, 1) 25%,
-        rgba(0, 0, 0, 0.95) 40%,
-        rgba(0, 0, 0, 0.85) 60%,
-        rgba(0, 0, 0, 0.7) 80%,
-        rgba(0, 0, 0, 0) 100%
-    );
-    pointer-events: none;
-}
-
-#CarBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-/* === GALLERY AND CONTACT CONTAINER === */
-.gallery-and-contact-container {
-    display: flex;
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    position: relative;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-/* === GALLERY === */
-.gallery-page {
-    flex: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    min-width: 0;
-}
-
-.gallery-header {
-    color: white;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.gallery-header h1 {
-    font-size: 32px;
-    letter-spacing: 2px;
-}
-
-.gallery-container-main {
-    max-width: 1200px;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    border: 1px solid rgb(139, 137, 137);
-    backdrop-filter: blur(10px);
-}
-
-.gallery-content {
-    padding: 40px;
-    position: relative;
-}
-
-.gallery-main-image {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    margin-bottom: 30px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgb(139, 137, 137);
-}
-
-.gallery-image-display {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-counter {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    border: 1px solid rgb(139, 137, 137);
-    font-family: Mileast, sans-serif;
-}
-
-.gallery-navigation {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 20px;
-}
-
-.gallery-nav-btn {
-    background: rgba(255, 255, 255, 0.9);
-    color: #030303;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 1px solid rgb(139, 137, 137);
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-}
-
-.gallery-nav-btn:hover {
-    background: white;
-}
-
-.gallery-nav-btn.disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
-
-.gallery-nav-btn.disabled:hover {
-    background: rgba(255, 255, 255, 0.9);
-}
-
-.gallery-thumbnail-container {
-    position: relative;
-    padding: 0 40px;
-}
-
-.gallery-thumbnail-swiper {
-    height: 120px;
-}
-
-.gallery-thumb-slide {
-    width: 150px;
-    height: 100px;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    opacity: 0.6;
-    border: 2px solid transparent;
-    transition: opacity 0.3s, border-color 0.3s;
-}
-
-.gallery-thumb-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gallery-thumb-slide-active {
-    opacity: 1;
-    border: 3px solid #ffffff;
-}
-
-.gallery-pagination {
-    position: relative;
-    margin-top: 25px;
-}
-
-.gallery-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: #666363;
-    opacity: 1;
-}
-
-.gallery-pagination-bullet-active {
-    background: #ffffff;
-}
-
-/* === SPÉCIFICATIONS === */
-.Spécifications {
-    max-width: 1200px;
-    margin: 40px auto 0;
-    padding: 20px 0 0 0;
-    width: 100%;
-}
-
-.Spécifications h3 {
-    margin-bottom: 30px;
-    font-size: 24px;
-    color: #ffffff;
-    width: 100%;
-    text-align: center;
-}
-
-.spécifications-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.spécifications-container > div {
-    border: 1px solid #ffffff49;
-    border-radius: 10px;
-    padding: 25px;
-    background-color: transparent;
-}
-
-.spécifications-container > div .fa-solid {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 15px;
-    font-size: 28px;
-    color: #ffffff;
-}
-
-.spécifications-container > div h4 {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0;
-    font-size: 20px;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.spécifications-container > div p {
-    margin: 20px 0 0 0;
-    color: #ffffff93;
-    line-height: 1.6;
-    font-size: 16px;
-    padding-left: 0;
-}
-
-/* === CONTACT SIDEBAR === */
-.contact-pricing-sidebar {
-    flex: 0 0 350px;
-    position: sticky;
-    top: 120px;
-    align-self: flex-start;
-    height: fit-content;
-    margin-top: 60px;
-    min-width: 0;
-}
-
-.pricing-card {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgb(139, 137, 137);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.pricing-card h3 {
-    color: white;
-    font-size: 22px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.contact-info {
-    color: white;
-}
-
-.contact-person h4 {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #ffffff;
-}
-
-.contact-person .role {
-    font-size: 14px;
-    color: #aaa;
-    margin-bottom: 15px;
-    font-style: italic;
-}
-
-.contact-details p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.contact-details i {
-    width: 20px;
-    color: #818181;
-}
-
-.finance-options {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgb(139, 137, 137);
-    font-size: 15px;
-    color: #ccc;
-    line-height: 1.5;
-}
-
-/* === FOOTER === */
-footer {
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 60px 20px 30px;
-    color: white;
-}
-
-.footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    gap: 40px;
-    text-align: center;
-}
-
-.footer-logo {
-    flex: 1;
-    min-width: 220px;
-}
-
-.footer-logo img {
-    width: 120px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.footer-logo p {
-    color: #ccc;
-    font-size: 14px;
-}
-
-.footer-menu {
-    flex: 1;
-    min-width: 220px;
-}
-
-.footer-menu h3 {
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.footer-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.footer-menu li {
-    margin-bottom: 10px;
-}
-
-.footer-menu a {
-    text-decoration: none;
-    color: #ccc;
-    transition: color 0.3s;
-}
-
-.footer-menu a:hover {
-    color: #818181;
-}
-
-.footer-contact {
-    flex: 1;
-    min-width: 220px;
-}
-
-.footer-contact h3 {
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.footer-contact p {
-    margin: 5px 0;
-    color: #ccc;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 14px;
-    color: #aaa;
-    border-top: 1px solid #333;
-    padding-top: 15px;
-}
-
-.footer-bottom span {
-    color: #ff4d4d;
-}
-
-/* === CORRECTIONS POUR ÉCRANS MOYENS (1025px À 1295px) === */
-@media (min-width: 1025px) and (max-width: 1295px) {
-    .gallery-and-contact-container {
-        max-width: 100%;
-        padding: 30px 20px;
-        gap: 25px;
-    }
-    
-    .gallery-page {
-        flex: 1;
-        max-width: 65%;
-        min-width: 0;
-    }
-    
-    .contact-pricing-sidebar {
-        flex: 0 0 300px;
-        min-width: 0;
-    }
-    
-    .gallery-main-image {
-        height: 400px;
-    }
-    
-    .gallery-content {
-        padding: 30px 25px;
-    }
-    
-    .gallery-thumbnail-container {
-        padding: 0 25px;
-    }
-    
-    .gallery-thumb-slide {
-        width: 130px;
-        height: 90px;
-    }
-    
-    .gallery-thumbnail-swiper {
-        height: 110px;
-    }
-    
-    .spécifications-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        max-width: 100%;
-    }
-    
-    .spécifications-container > div {
-        padding: 20px;
-    }
-    
-    .pricing-card {
-        padding: 20px;
-    }
-    
-    .pricing-card h3 {
-        font-size: 20px;
-    }
-}
-
-/* === CORRECTIONS POUR GRANDS ÉCRANS (1296px À 1395px) === */
-@media (min-width: 1296px) and (max-width: 1395px) {
-    .gallery-container-main {
-        max-width: 100%;
-    }
-    
-    .gallery-thumbnail-swiper .swiper-wrapper {
-        justify-content: center;
-    }
-    
-    .gallery-page {
-        max-width: 70%;
-    }
-    
-    .contact-pricing-sidebar {
-        flex: 0 0 320px;
-    }
-}
-
-/* === RESPONSIVE DESIGN - TABLETTES (768px À 1024px) === */
-@media (max-width: 1024px) {
-    .gallery-and-contact-container {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .contact-pricing-sidebar {
-        flex: 1;
-        position: static;
-        margin-top: 0;
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .gallery-page {
-        width: 100%;
-        max-width: 100%;
-    }
-}
-
-/* === RESPONSIVE DESIGN - PETITES TABLETTES (768px) === */
-@media (max-width: 768px) {
-    .burger {
-        display: block;
-    }
-    
-    .menu {
-        display: none;
-    }
-    
-    .hero-cars-details {
-        height: 40vh;
-    }
-    
-    .hero-cars-details-content {
-        bottom: 15%;
-        left: 5%;
-        right: 5%;
-    }
-    
-    .hero-cars-details-text h1 {
-        font-size: 28px;
-    }
-    
-    .hero-cars-details-text p {
-        font-size: 16px;
-        padding-top: 10px;
-    }
-    
-    .gallery-and-contact-container {
-        padding: 20px 15px;
-    }
-    
-    .pricing-card {
-        padding: 20px;
-    }
-    
-    .pricing-card h3 {
-        font-size: 20px;
-    }
-    
-    .contact-details p {
-        font-size: 15px;
-    }
-    
-    .gallery-content {
-        padding: 20px;
-    }
-    
-    .gallery-main-image {
-        height: 300px;
-    }
-    
-    .gallery-thumbnail-container {
-        padding: 0 20px;
-    }
-    
-    .gallery-nav-btn {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .gallery-thumbnail-swiper {
-        height: 100px;
-    }
-    
-    .gallery-thumb-slide {
-        width: 120px;
-        height: 80px;
-    }
-    
-    .spécifications-container {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        max-width: 100%;
-    }
-    
-    .spécifications-container > div {
-        padding: 20px;
-    }
-    
-    .spécifications-container > div .fa-solid {
-        font-size: 24px;
-        margin-right: 12px;
-    }
-    
-    .spécifications-container > div h4 {
-        font-size: 18px;
-    }
-    
-    .spécifications-container > div p {
-        font-size: 15px;
-        margin-top: 15px;
-    }
-    
-    .footer-menu ul {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-    }
-}
-
-/* === RESPONSIVE DESIGN - MOBILES (576px) === */
-@media (max-width: 576px) {
-    .hero-cars-details {
-        height: 50vh;
-    }
-    
-    .hero-cars-details-text h1 {
-        font-size: 24px;
-    }
-    
-    .hero-cars-details-text p {
-        font-size: 14px;
-    }
-    
-    .hero-cars-overlay {
-        font-size: 12px;
-        padding: 4px;
-    }
-    
-    .retour-btn {
-        top: 20%;
-        padding: 6px 8px;
-    }
-    
-    .retour-btn span {
-        font-size: 14px;
-    }
-    
-    .gallery-page {
-        padding: 30px 10px;
-    }
-    
-    .gallery-main-image {
-        height: 250px;
-    }
-    
-    .gallery-thumbnail-swiper {
-        height: 80px;
-    }
-    
-    .gallery-thumb-slide {
-        width: 100px;
-        height: 70px;
-    }
-    
-    .gallery-navigation {
-        padding: 0 10px;
-    }
-    
-    .gallery-nav-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-    
-    .gallery-counter {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-    }
-    
-    .Spécifications h3 {
-        font-size: 20px;
-    }
-    
-    .spécifications-container > div {
-        padding: 15px;
-    }
-    
-    .gallery-header h1 {
-        font-size: 24px;
-    }
-}
-
-/* === RESPONSIVE DESIGN - PETITS MOBILES (480px) === */
-@media (max-width: 480px) {
-    .navbar {
-        padding: 8px 3%;
-    }
-    
-    .hero-cars-details {
-        height: 55vh;
-    }
-    
-    .gallery-thumb-slide {
-        width: 90px;
-        height: 60px;
-    }
-    
-    .gallery-content {
-        padding: 15px;
-    }
-    
-    .gallery-thumbnail-container {
-        padding: 0 15px;
-    }
-    
-    .spécifications-container > div {
-        padding: 12px;
-    }
-    
-    .spécifications-container > div .fa-solid {
-        font-size: 20px;
-        margin-right: 8px;
-    }
-    
-    .spécifications-container > div h4 {
-        font-size: 16px;
-    }
-    
-    .spécifications-container > div p {
-        font-size: 14px;
-        margin-top: 10px;
-    }
-}
-
-/* === CORRECTIONS SUPPLÉMENTAIRES POUR LA GALERIE === */
-@media (min-width: 1025px) and (max-width: 1395px) {
-    .gallery-container-main {
-        max-width: 100%;
-    }
-    
-    .gallery-thumbnail-swiper .swiper-wrapper {
-        justify-content: center;
-    }
-}
-
-/* === AMÉLIORATIONS GÉNÉRALES === */
-.gallery-image-display {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Assurer que les images de fond couvrent bien */
-#CarBackground {
-    object-fit: cover;
-}
-
-/* Amélioration de la transition des images de galerie */
-.gallery-image-display {
-    transition: opacity 0.3s ease-in-out;
-}
-
-/* Correction pour les écrans très larges */
-@media (min-width: 1600px) {
-    .gallery-and-contact-container {
-        max-width: 1500px;
-    }
-    
-    .gallery-page {
-        max-width: 1000px;
-    }
-    
-    .contact-pricing-sidebar {
-        flex: 0 0 380px;
-    }
-}
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .reservation-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #34495e;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Loader -->
-    <div id="loader">
-        <img src="/assets/images/bariz-logo.png" alt="Logo">
-        <div class="line"></div>
-        <h3>Bienvenue sur BARIZ CARS</h3>
+    <div class="reservation-container">
+        <h2>Réservation de Voiture</h2>
+        <form id="car-reservation-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pickup-location" class="required">Lieu de prise en charge</label>
+                    <input type="text" id="pickup-location" name="pickup-location" required>
+                </div>
+                <div class="form-group">
+                    <label for="return-location" class="required">Lieu de restitution</label>
+                    <input type="text" id="return-location" name="return-location" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pickup-date" class="required">Date de prise en charge</label>
+                    <input type="date" id="pickup-date" name="pickup-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="pickup-time" class="required">Heure de prise en charge</label>
+                    <input type="time" id="pickup-time" name="pickup-time" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="return-date" class="required">Date de restitution</label>
+                    <input type="date" id="return-date" name="return-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="return-time" class="required">Heure de restitution</label>
+                    <input type="time" id="return-time" name="return-time" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="car-type" class="required">Type de véhicule</label>
+                <select id="car-type" name="car-type" required>
+                    <option value="">Sélectionnez un type de véhicule</option>
+                    <option value="economy">Économique</option>
+                    <option value="compact">Compacte</option>
+                    <option value="intermediate">Intermédiaire</option>
+                    <option value="standard">Standard</option>
+                    <option value="fullsize">Grande taille</option>
+                    <option value="premium">Premium</option>
+                    <option value="luxury">Luxe</option>
+                    <option value="suv">SUV</option>
+                    <option value="minivan">Minivan</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="driver-age">Âge du conducteur</label>
+                <input type="number" id="driver-age" name="driver-age" min="21" max="80">
+            </div>
+            
+            <div class="form-group">
+                <label for="special-requests">Demandes spéciales</label>
+                <textarea id="special-requests" name="special-requests" rows="3" placeholder="Siège bébé, GPS, etc."></textarea>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="insurance" name="insurance">
+                <label for="insurance">Ajouter une assurance complète</label>
+            </div>
+            
+            <button type="submit">Réserver maintenant</button>
+        </form>
     </div>
 
-    <div id="content" style="display: none;">
-        <!-- Navbar -->
-        <nav class="navbar" id="navbar">
-            <a href="index.html">
-                <img src="/assets/images/bariz-logo.png" alt="Logo BARIZ CARS" id="logo">
-            </a>
-            <button class="burger" id="burger">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="menu" id="menu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="cars.html">Voitures</a></li>
-                <li><a href="about.html">À propos</a></li>
-                <li><a href="#Contact" id="goToContact">Contact</a></li>
-            </ul>
-        </nav>
-        
-        <!-- Menu Mobile -->
-        <div class="fullscreen-menu" id="fullscreenMenu">
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="cars.html">Voitures</a></li>
-                <li><a href="about.html">À propos</a></li>
-                <li><a href="#Contact">Contact</a></li>
-            </ul>
-            <div class="info-nav">
-                <i class="fa-brands fa-square-instagram"></i>
-                <i class="fas fa-phone"></i>
-                <i class="fas fa-envelope"></i>
-            </div>
-        </div>
-
-        <!-- Section Hero -->
-        <section class="hero-cars-details">
-            <div class="image-container-details">
-                <img src="/assets/images/car-2.jpg" alt="" id="CarBackground">
-            </div>
-            <div class="smoke-effect-realistic"></div>
-            <button class="retour-btn"><img src="/assets/images/chevron-gauche.png" alt=""><span>Retour</span></button>
-            <div class="hero-cars-details-content">
-                <div class="hero-cars-details-text">
-                    <h1>Voitures de Luxe</h1>
-                    <p>Explorez notre collection exclusive des voitures les plus prestigieuses au monde, des bolides sportifs ultra-performants aux modèles classiques intemporels.</p>
-                </div>
-                <div class="hero-cars-overlay">Sport</div>
-            </div>
-        </section>
-
-        <!-- Gallery and Contact Container -->
-        <div class="gallery-and-contact-container">
-            <section class="gallery-page">
-                <div class="gallery-header">
-                    <h1>COLLECTIONS SIGNATURE</h1>
-                </div>
-                <div class="gallery-container-main">
-                    <div class="gallery-content">
-                        <div class="gallery-main-image">
-                            <img id="galleryMainImage" class="gallery-image-display" src="/assets/images/car-1.png" alt="Voiture de luxe">
-                            <div class="gallery-counter">
-                                <span id="galleryCurrentImage">1</span> / <span id="galleryTotalImages">5</span>
-                            </div>
-                            
-                            <div class="gallery-navigation">
-                                <div id="galleryPrevBtn" class="gallery-nav-btn disabled">
-                                    <i class="fas fa-chevron-left"></i>
-                                </div>
-                                <div id="galleryNextBtn" class="gallery-nav-btn">
-                                    <i class="fas fa-chevron-right"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-thumbnail-container">
-                            <div class="swiper gallery-thumbnail-swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide gallery-thumb-slide gallery-thumb-slide-active" data-image="/assets/images/car-1.png" data-index="0">
-                                        <img src="/assets/images/car-1.png" alt="Voiture 1">
-                                    </div>
-                                    <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="1">
-                                        <img src="/assets/images/car-1.png" alt="Voiture 2">
-                                    </div>
-                                    <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="2">
-                                        <img src="/assets/images/car-1.png" alt="Voiture 3">
-                                    </div>
-                                    <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="3">
-                                        <img src="/assets/images/car-1.png" alt="Voiture 4">
-                                    </div>
-                                    <div class="swiper-slide gallery-thumb-slide" data-image="/assets/images/car-1.png" data-index="4">
-                                        <img src="/assets/images/car-1.png" alt="Voiture 5">
-                                    </div>
-                                </div>
-                                
-                                <div class="swiper-pagination gallery-pagination"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Spécifications Techniques -->
-                <div class="Spécifications">
-                    <h3>Spécifications Techniques</h3>
-                    <div class="spécifications-container">
-                        <div class="moteur">
-                            <i class="fa-solid fa-bolt"></i>
-                            <h4>Moteur</h4>
-                            <p>2.5L Turbocharged 5-cylinder</p>
-                        </div>
-                        <div class="Puissance">
-                            <i class="fa-solid fa-gauge-high"></i>
-                            <h4>Puissance</h4>
-                            <p>400 chevaux</p>
-                        </div>
-                        <div class="Accélération">
-                            <i class="fa-solid fa-gauge"></i>
-                            <h4>Accélération</h4>
-                            <p>0-100 km/h en 3.9s</p>
-                        </div>
-                        <div class="Vitesse Max">
-                            <i class="fa-solid fa-gauge-high"></i>
-                            <h4>Vitesse Max</h4>
-                            <p>250 km/h</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section Contactez-nous pour les prix -->
-            <aside class="contact-pricing-sidebar">
-                <div class="pricing-card">
-                    <h3>Contactez-nous pour les prix</h3>
-                    <div class="contact-info">
-                        <div class="contact-person">
-                            <h4>Votre contact</h4>
-                            <p class="role">Sales Manager</p>
-                            <div class="contact-details">
-                                <p><i class="fas fa-phone"></i> +212 6 75-100-100</p>
-                                <p><i class="fas fa-envelope"></i> marnissi.motors@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="finance-options">
-                            <p>Contactez-nous pour des options de financement personnalisées</p>
-                        </div>
-                    </div>
-                </div>
-            </aside>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <div class="footer-container">
-                <!-- Logo + texte -->
-                <div class="footer-logo">
-                    <img src="/assets/images/bariz-logo.png" alt="Logo">
-                    <p>Des voitures d'exception, un service irréprochable.</p>
-                </div>
-
-                <!-- Menu -->
-                <div class="footer-menu">
-                    <h3>Voitures</h3>
-                    <ul>
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div class="footer-contact">
-                    <h3>Contact</h3>
-                    <p>📍 123 Rue Principale, Casablanca</p>
-                    <p>📞 +212 6 00 00 00 00</p>
-                    <p>✉️ contact@votresite.com</p>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                MADE WITH PAIN <span>🖤</span> BY YASERDEV
-            </div>
-        </footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>  
-    <script src="https://kit.fontawesome.com/97ff5bc4bb.js" crossorigin="anonymous"></script>
     <script>
-        // == SWIPER EVENT == //
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Swiper
-            const swiper = new Swiper('.swiper', {
-                slidesPerView: 1,
-                spaceBetween: 30,
-                loop: true,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints: {
-                    640: {
-                        slidesPerView: 1,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                    },
-                    1024: {
-                        slidesPerView: 3,
-                    },
-                },
-            });
+        document.getElementById('car-reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Initialize Gallery
-            if (document.querySelector('.gallery-page')) {
-                initGallery();
+            // Validation simple
+            const pickupDate = new Date(document.getElementById('pickup-date').value);
+            const returnDate = new Date(document.getElementById('return-date').value);
+            
+            if (returnDate <= pickupDate) {
+                alert('La date de restitution doit être postérieure à la date de prise en charge.');
+                return;
             }
+            
+            // Simulation de réservation réussie
+            alert('Votre réservation a été soumise avec succès!');
+            // Ici, vous pourriez envoyer les données à un serveur
         });
-
-        //== Effet du bordure pour le menu ==//
-        const navbar = document.querySelector('.navbar');
-        const logo = document.getElementById('logo');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('active');
-                logo.classList.add('active');
-            } else {
-                navbar.classList.remove('active');
-                logo.classList.remove('active');
-            }
-        });
-
-        //== afficher le menu en Mobile ==//
-        const burger = document.getElementById('burger');
-        const fullscreenMenu = document.getElementById('fullscreenMenu');
-
-        burger.addEventListener('click', () => {
-            fullscreenMenu.classList.toggle('active');
-            if (fullscreenMenu.classList.contains('active')) {
-                burger.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                burger.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-        });
-
-        //== Loader au démarrage de la page ==//
-        const loader = document.getElementById("loader");
-        const content = document.getElementById("content");
-
-        // Masquer le loader après quelques secondes
-        setTimeout(() => {
-            loader.style.opacity = "0";
-            loader.style.transition = "opacity 1s ease";
-            setTimeout(() => {
-                loader.style.display = "none";
-                content.style.display = "block";
-                document.body.style.overflow = "auto";
-            }, 1000);
-        }, 3500);
-
-        // Gallery functionality
-        function initGallery() {
-            const galleryImages = [
-                {
-                    main: "/assets/images/car-1.png",
-                    thumb: "/assets/images/car-1.png"
-                },
-                {
-                    main: "/assets/images/car-1.png",
-                    thumb: "/assets/images/car-1.png"
-                },
-                {
-                    main: "/assets/images/car-1.png",
-                    thumb: "/assets/images/car-1.png"
-                },
-                {
-                    main: "/assets/images/car-1.png",
-                    thumb: "/assets/images/car-1.png"
-                },
-                {
-                    main: "/assets/images/car-1.png",
-                    thumb: "/assets/images/car-1.png"
-                }
-            ];
-            
-            let galleryCurrentIndex = 0;
-            const galleryTotalImages = galleryImages.length;
-            
-            const galleryMainImage = document.getElementById('galleryMainImage');
-            const galleryCurrentImageSpan = document.getElementById('galleryCurrentImage');
-            const galleryTotalImagesSpan = document.getElementById('galleryTotalImages');
-            const galleryPrevBtn = document.getElementById('galleryPrevBtn');
-            const galleryNextBtn = document.getElementById('galleryNextBtn');
-            const thumbSlides = document.querySelectorAll('.gallery-thumb-slide');
-            
-            // Initialiser le compteur
-            galleryTotalImagesSpan.textContent = galleryTotalImages;
-            updateGalleryCounter();
-            
-            // Initialiser Swiper pour les miniatures
-            const galleryThumbnailSwiper = new Swiper('.gallery-thumbnail-swiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 15,
-                centeredSlides: true,
-                loop: false,
-                pagination: {
-                    el: '.gallery-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    320: {
-                        slidesPerView: 2,
-                        spaceBetween: 10,
-                    },
-                    480: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                    },
-                    640: {
-                        slidesPerView: 3,
-                        spaceBetween: 10,
-                    },
-                    768: {
-                        slidesPerView: 4,
-                        spaceBetween: 15,
-                    },
-                    1024: {
-                        slidesPerView: 5,
-                        spaceBetween: 20,
-                    },
-                },
-            });
-            
-            // Mettre à jour l'image principale et le swiper
-            function updateGalleryMainImage(index) {
-                galleryCurrentIndex = index;
-                
-                // Animation de fondu
-                galleryMainImage.style.opacity = '0';
-                
-                setTimeout(() => {
-                    galleryMainImage.src = galleryImages[galleryCurrentIndex].main;
-                    galleryMainImage.style.opacity = '1';
-                    updateGalleryCounter();
-                    updateGalleryButtons();
-                    updateActiveThumb();
-                    
-                    // Mettre à jour le swiper
-                    galleryThumbnailSwiper.slideTo(galleryCurrentIndex);
-                }, 200);
-            }
-            
-            // Mettre à jour le compteur
-            function updateGalleryCounter() {
-                galleryCurrentImageSpan.textContent = galleryCurrentIndex + 1;
-            }
-            
-            // Mettre à jour l'état des boutons
-            function updateGalleryButtons() {
-                galleryPrevBtn.classList.toggle('disabled', galleryCurrentIndex === 0);
-                galleryNextBtn.classList.toggle('disabled', galleryCurrentIndex === galleryTotalImages - 1);
-            }
-            
-            // Mettre à jour la miniature active
-            function updateActiveThumb() {
-                thumbSlides.forEach((slide, index) => {
-                    if (index === galleryCurrentIndex) {
-                        slide.classList.add('gallery-thumb-slide-active');
-                    } else {
-                        slide.classList.remove('gallery-thumb-slide-active');
-                    }
-                });
-            }
-            
-            // Événements pour les boutons de navigation
-            galleryPrevBtn.addEventListener('click', function() {
-                if (galleryCurrentIndex > 0) {
-                    updateGalleryMainImage(galleryCurrentIndex - 1);
-                }
-            });
-            
-            galleryNextBtn.addEventListener('click', function() {
-                if (galleryCurrentIndex < galleryTotalImages - 1) {
-                    updateGalleryMainImage(galleryCurrentIndex + 1);
-                }
-            });
-            
-            // Mettre à jour l'image principale lorsqu'on clique sur une miniature
-            thumbSlides.forEach((slide, index) => {
-                slide.addEventListener('click', function() {
-                    updateGalleryMainImage(index);
-                });
-            });
-            
-            // Mettre à jour l'image principale lorsqu'on change de slide dans le swiper
-            galleryThumbnailSwiper.on('slideChange', function() {
-                const activeIndex = galleryThumbnailSwiper.activeIndex;
-                // Vérifier que l'index est valide
-                if (activeIndex >= 0 && activeIndex < galleryTotalImages) {
-                    updateGalleryMainImage(activeIndex);
-                }
-            });
-            
-            // Initialisation
-            updateGalleryButtons();
-            updateActiveThumb();
-            
-            // Gestion du redimensionnement de la fenêtre
-            window.addEventListener('resize', function() {
-                galleryThumbnailSwiper.update();
-            });
-        }
-
-        // Retour button functionality
-        document.querySelector('.retour-btn').addEventListener('click', function() {
-            window.history.back();
-        });
+        
+        // Définir la date minimale comme aujourd'hui
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickup-date').min = today;
+        document.getElementById('return-date').min = today;
     </script>
 </body>
 </html>

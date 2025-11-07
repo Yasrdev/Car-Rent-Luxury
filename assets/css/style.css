@@ -1954,7 +1954,7 @@ justify-content: center;
   line-height: 1.5;
 }
 
-.book-btn{
+.booking-btn{
   width: 100%;
   background-color: transparent;
   color: #fff;
@@ -1967,10 +1967,335 @@ justify-content: center;
   transition: transform 0.3s, background-color 0.3s;
 }
 
-.book-btn:hover{
+.booking-btn:hover{
   background-color: #aaaaaa4f;
 }
 
+
+
+
+  /* Modal de réservation - STYLES RESPONSIVES */
+    .booking-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .booking-modal.active {
+        display: flex;
+    }
+
+    .booking-modal-content {
+        background: rgba(0, 0, 0, 0.95);
+        border: 1px solid rgb(139, 137, 137);
+        border-radius: 15px;
+        width: 100%;
+        max-width: 700px;
+        padding: 30px;
+        color: white;
+        position: relative;
+        box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .booking-modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+        z-index: 10;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .booking-modal-close:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .booking-modal-title {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+        padding-right: 40px;
+    }
+
+    .booking-form-group {
+        margin-bottom: 20px;
+    }
+
+    .booking-form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .booking-form-input, .booking-form-select, .booking-form-textarea {
+        width: 100%;
+        padding: 14px 16px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgb(139, 137, 137);
+        border-radius: 8px;
+        font-size: 16px;
+        color: white;
+        transition: border-color 0.3s;
+        font-family: 'Mileast', sans-serif;
+    }
+
+    /* Styles spécifiques pour les inputs date et time */
+    .date-input-container, .time-input-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .date-time-input {
+        padding-right: 45px !important; /* Espace pour l'icône */
+    }
+
+    .date-icon, .time-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #818181;
+        pointer-events: none;
+        font-size: 16px;
+    }
+
+    /* Correction pour les inputs date/time sur différents navigateurs */
+    .date-time-input::-webkit-calendar-picker-indicator {
+        background: transparent;
+        bottom: 0;
+        color: transparent;
+        cursor: pointer;
+        height: auto;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    .date-time-input::-webkit-datetime-edit-fields-wrapper {
+        padding: 0;
+    }
+
+    .date-time-input::-webkit-datetime-edit {
+        padding: 0;
+    }
+
+    .date-time-input::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    .date-time-input::-webkit-clear-button {
+        display: none;
+    }
+
+    /* Pour Firefox */
+    .date-time-input {
+        -moz-appearance: textfield;
+    }
+
+    .date-time-input::-moz-focus-inner {
+        border: 0;
+    }
+
+    /* Pour assurer la visibilité sur tous les navigateurs */
+    .date-time-input:focus {
+        border-color: #ffffff;
+        outline: none;
+    }
+
+    .booking-form-input:focus, .booking-form-select:focus, .booking-form-textarea:focus {
+        border-color: #ffffff;
+        outline: none;
+    }
+
+    .booking-form-row {
+        display: flex;
+        gap: 15px;
+    }
+
+    .booking-form-row .booking-form-group {
+        flex: 1;
+    }
+
+    .booking-form-checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding: 10px 0;
+    }
+
+    .booking-form-checkbox input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .booking-form-submit {
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        border-radius: 8px;
+        padding: 16px 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s;
+        font-family: 'Mileast', sans-serif;
+        margin-top: 10px;
+    }
+
+    .booking-form-submit:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .booking-required::after {
+        content: " *";
+        color: #e74c3c;
+    }
+
+    /* Media Queries pour la responsivité du modal */
+    @media (max-width: 768px) {
+        .booking-modal-content {
+            padding: 25px 20px;
+        }
+        
+        .booking-modal-title {
+            font-size: 1.5rem;
+        }
+        
+        .booking-form-row {
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .date-time-input {
+            padding: 12px 40px 12px 12px !important;
+        }
+        
+        .date-icon, .time-icon {
+            right: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .booking-modal {
+            padding: 10px;
+        }
+        
+        .booking-modal-content {
+            padding: 20px 15px;
+        }
+        
+        .booking-modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .booking-form-input, .booking-form-select, .booking-form-textarea {
+            padding: 12px 14px;
+            font-size: 15px;
+        }
+        
+        .date-time-input {
+            padding: 12px 35px 12px 12px !important;
+            font-size: 15px;
+        }
+        
+        .date-icon, .time-icon {
+            right: 10px;
+            font-size: 14px;
+        }
+        
+        .booking-form-submit {
+            padding: 14px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .booking-modal-content {
+            padding: 15px 12px;
+        }
+        
+        .booking-modal-title {
+            font-size: 1.2rem;
+        }
+        
+        .booking-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .date-time-input {
+            padding: 10px 30px 10px 10px !important;
+        }
+        
+        .date-icon, .time-icon {
+            right: 8px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .booking-modal-title {
+            font-size: 1.1rem;
+        }
+        
+        .booking-form-input, .booking-form-select, .booking-form-textarea {
+            padding: 10px 12px;
+        }
+        
+        .date-time-input {
+            padding: 10px 28px 10px 10px !important;
+        }
+    }
+
+    /* Améliorations pour l'accessibilité mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .booking-modal-content {
+            max-height: 80vh;
+        }
+    }
+
+    /* Correction pour les petits écrans en hauteur */
+    @media (max-height: 600px) {
+        .booking-modal-content {
+            max-height: 85vh;
+        }
+        
+        .booking-modal-title {
+            margin-bottom: 15px;
+        }
+        
+        .booking-form-group {
+            margin-bottom: 15px;
+        }
+    }
 /* Footer */
 footer {
   background-color: rgba(0, 0, 0, 0.9);

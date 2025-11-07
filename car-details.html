@@ -66,8 +66,7 @@
     </div>
   </section>
 
-  <div class="gallery-and-contact-container">
-     
+<div class="gallery-and-contact-container">
  <section class="gallery-page">
   <!-- <button class="retour-btn"><img src="/assets/images/chevron-gauche.png" alt=""><span>Retour</span></button> -->
     <div class="gallery-header">
@@ -160,10 +159,82 @@
           <div class="finance-options">
             <p>Contactez-nous pour des options de financement personnalisées</p>
           </div>
-          <button class="book-btn">Reserver</button>
+          <button class="booking-btn" >Reserver</button>
         </div>
       </div>
     </aside>
+</div>
+<!-- Modal de Réservation -->
+<div class="booking-modal" id="bookingModal">
+    <div class="booking-modal-content">
+        <button class="booking-modal-close" id="bookingModalClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2 class="booking-modal-title">RÉSERVER CETTE VOITURE</h2>
+        <form id="bookingForm">
+            <div class="booking-form-row">
+                <div class="booking-form-group">
+                    <label for="booking-pickup-location" class="booking-form-label booking-required">Lieu de prise en charge</label>
+                    <input type="text" id="booking-pickup-location" class="booking-form-input" name="pickup-location" required>
+                </div>
+                <div class="booking-form-group">
+                    <label for="booking-return-location" class="booking-form-label booking-required">Lieu de restitution</label>
+                    <input type="text" id="booking-return-location" class="booking-form-input" name="return-location" required>
+                </div>
+            </div>
+            
+            <div class="booking-form-row">
+                <div class="booking-form-group">
+                    <label for="booking-pickup-date" class="booking-form-label booking-required">Date de prise en charge</label>
+                    <div class="date-input-container">
+                        <input type="date" id="booking-pickup-date" class="booking-form-input date-time-input" name="pickup-date" required>
+                        <i class="fas fa-calendar-alt date-icon"></i>
+                    </div>
+                </div>
+                <div class="booking-form-group">
+                    <label for="booking-pickup-time" class="booking-form-label booking-required">Heure de prise en charge</label>
+                    <div class="time-input-container">
+                        <input type="time" id="booking-pickup-time" class="booking-form-input date-time-input" name="pickup-time" required>
+                        <i class="fas fa-clock time-icon"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking-form-row">
+                <div class="booking-form-group">
+                    <label for="booking-return-date" class="booking-form-label booking-required">Date de restitution</label>
+                    <div class="date-input-container">
+                        <input type="date" id="booking-return-date" class="booking-form-input date-time-input" name="return-date" required>
+                        <i class="fas fa-calendar-alt date-icon"></i>
+                    </div>
+                </div>
+                <div class="booking-form-group">
+                    <label for="booking-return-time" class="booking-form-label booking-required">Heure de restitution</label>
+                    <div class="time-input-container">
+                        <input type="time" id="booking-return-time" class="booking-form-input date-time-input" name="return-time" required>
+                        <i class="fas fa-clock time-icon"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking-form-group">
+                <label for="booking-driver-age" class="booking-form-label">Âge du conducteur</label>
+                <input type="number" id="booking-driver-age" class="booking-form-input" name="driver-age" min="21" max="80">
+            </div>
+            
+            <div class="booking-form-group">
+                <label for="booking-special-requests" class="booking-form-label">Demandes spéciales</label>
+                <textarea id="booking-special-requests" class="booking-form-textarea" name="special-requests" rows="3" placeholder="Siège bébé, GPS, etc."></textarea>
+            </div>
+            
+            <div class="booking-form-checkbox">
+                <input type="checkbox" id="booking-insurance" class="booking-form-input" name="insurance">
+                <label for="booking-insurance" class="booking-form-label">Ajouter une assurance complète</label>
+            </div>
+            
+            <button type="submit" class="booking-form-submit">CONFIRMER LA RÉSERVATION</button>
+        </form>
+    </div>
 </div>
 <footer>
   <div class="footer-container">

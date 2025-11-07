@@ -337,3 +337,63 @@ document.addEventListener('DOMContentLoaded', function() {
     initGallery();
   }
 });
+
+
+ // Gestion du modal de réservation
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookingModal = document.getElementById('bookingModal');
+        const bookingModalClose = document.getElementById('bookingModalClose');
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingBtn = document.querySelector('.booking-btn');
+        
+        // Ouvrir le modal
+        if (bookingBtn) {
+            bookingBtn.addEventListener('click', function() {
+                bookingModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Empêcher le défilement
+            });
+        }
+        
+        // Fermer le modal
+        bookingModalClose.addEventListener('click', function() {
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Rétablir le défilement
+        });
+        
+        // Fermer le modal en cliquant à l'extérieur
+        bookingModal.addEventListener('click', function(e) {
+            if (e.target === bookingModal) {
+                bookingModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Gestion de la soumission du formulaire
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validation simple
+            const pickupDate = new Date(document.getElementById('booking-pickup-date').value);
+            const returnDate = new Date(document.getElementById('booking-return-date').value);
+            
+            if (returnDate <= pickupDate) {
+                alert('La date de restitution doit être postérieure à la date de prise en charge.');
+                return;
+            }
+            
+            // Simulation de réservation réussie
+            alert('Votre réservation a été soumise avec succès! Nous vous contacterons bientôt.');
+            
+            // Fermer le modal
+            bookingModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Réinitialiser le formulaire
+            bookingForm.reset();
+        });
+        
+        // Définir la date minimale comme aujourd'hui
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('booking-pickup-date').min = today;
+        document.getElementById('booking-return-date').min = today;
+    });
