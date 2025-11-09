@@ -3,210 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réservation de Voiture</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        
-        .reservation-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin-top: 0;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #34495e;
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus, select:focus, textarea:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .checkbox-group input {
-            width: auto;
-        }
-        
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 14px 20px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-        
-        button:hover {
-            background-color: #2980b9;
-        }
-        
-        .required::after {
-            content: " *";
-            color: #e74c3c;
-        }
-        
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="dash-style.css">
+    <title>Inscription - BARIZ CARS</title>
 </head>
 <body>
-    <div class="reservation-container">
-        <h2>Réservation de Voiture</h2>
-        <form id="car-reservation-form">
-            <div class="form-row">
+    <!-- Image de fond avec effet flou -->
+    <div class="background"></div>
+    
+    <!-- Effets de fumée -->
+    <div class="smoke smoke-top"></div>
+    <div class="smoke smoke-bottom"></div>
+    
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Inscription</h1>
+            <p>Rejoignez BARIZ CARS et accédez à notre collection exclusive.</p>
+        </div>
+
+        <form id="registerForm">
+            <!-- Champs nom et prénom côte à côte -->
+            <div class="name-fields">
                 <div class="form-group">
-                    <label for="pickup-location" class="required">Lieu de prise en charge</label>
-                    <input type="text" id="pickup-location" name="pickup-location" required>
+                    <label for="firstName">Prénom</label>
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        class="form-control" 
+                        placeholder="Votre prénom"
+                        required
+                    >
+                    <div class="error-message" id="firstNameError">Le prénom est requis</div>
                 </div>
+
                 <div class="form-group">
-                    <label for="return-location" class="required">Lieu de restitution</label>
-                    <input type="text" id="return-location" name="return-location" required>
+                    <label for="lastName">Nom</label>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        class="form-control" 
+                        placeholder="Votre nom"
+                        required
+                    >
+                    <div class="error-message" id="lastNameError">Le nom est requis</div>
                 </div>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="pickup-date" class="required">Date de prise en charge</label>
-                    <input type="date" id="pickup-date" name="pickup-date" required>
-                </div>
-                <div class="form-group">
-                    <label for="pickup-time" class="required">Heure de prise en charge</label>
-                    <input type="time" id="pickup-time" name="pickup-time" required>
-                </div>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="return-date" class="required">Date de restitution</label>
-                    <input type="date" id="return-date" name="return-date" required>
-                </div>
-                <div class="form-group">
-                    <label for="return-time" class="required">Heure de restitution</label>
-                    <input type="time" id="return-time" name="return-time" required>
-                </div>
-            </div>
-            
+
+            <!-- Email -->
             <div class="form-group">
-                <label for="car-type" class="required">Type de véhicule</label>
-                <select id="car-type" name="car-type" required>
-                    <option value="">Sélectionnez un type de véhicule</option>
-                    <option value="economy">Économique</option>
-                    <option value="compact">Compacte</option>
-                    <option value="intermediate">Intermédiaire</option>
-                    <option value="standard">Standard</option>
-                    <option value="fullsize">Grande taille</option>
-                    <option value="premium">Premium</option>
-                    <option value="luxury">Luxe</option>
-                    <option value="suv">SUV</option>
-                    <option value="minivan">Minivan</option>
-                </select>
+                <label for="email">Email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    class="form-control" 
+                    placeholder="votre@email.com"
+                    required
+                >
+                <div class="error-message" id="emailError">Veuillez entrer un email valide</div>
             </div>
-            
+
+            <!-- Téléphone -->
             <div class="form-group">
-                <label for="driver-age">Âge du conducteur</label>
-                <input type="number" id="driver-age" name="driver-age" min="21" max="80">
+                <label for="phone">Téléphone</label>
+                <div class="phone-field">
+                    <span class="phone-prefix">+212</span>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        class="form-control" 
+                        placeholder="6 00 00 00 00"
+                        pattern="[0-9]{9}"
+                        required
+                    >
+                </div>
+                <div class="error-message" id="phoneError">Numéro de téléphone invalide</div>
             </div>
-            
+
+            <!-- Mot de passe avec indicateur de force -->
             <div class="form-group">
-                <label for="special-requests">Demandes spéciales</label>
-                <textarea id="special-requests" name="special-requests" rows="3" placeholder="Siège bébé, GPS, etc."></textarea>
+                <label for="password">Mot de passe</label>
+                <div class="password-container">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-control" 
+                        placeholder="Créez un mot de passe"
+                        required
+                        minlength="8"
+                    >
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        👁️
+                    </button>
+                </div>
+                <div class="password-strength">
+                    <div class="strength-bar" id="passwordStrength"></div>
+                </div>
+                <div class="strength-text" id="passwordStrengthText"></div>
+                <div class="error-message" id="passwordError">Le mot de passe doit contenir au moins 8 caractères</div>
             </div>
-            
-            <div class="checkbox-group">
-                <input type="checkbox" id="insurance" name="insurance">
-                <label for="insurance">Ajouter une assurance complète</label>
+
+            <!-- Confirmation mot de passe -->
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <div class="password-container">
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        class="form-control" 
+                        placeholder="Confirmez votre mot de passe"
+                        required
+                    >
+                    <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                        👁️
+                    </button>
+                </div>
+                <div class="error-message" id="confirmPasswordError">Les mots de passe ne correspondent pas</div>
             </div>
-            
-            <button type="submit">Réserver maintenant</button>
+
+            <!-- Conditions générales -->
+            <div class="terms-container">
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="acceptTerms" required>
+                    <label for="acceptTerms">
+                        J'accepte les <a href="#">conditions générales</a> et la 
+                        <a href="#">politique de confidentialité</a>
+                    </label>
+                </div>
+                <div class="error-message" id="termsError">Vous devez accepter les conditions</div>
+            </div>
+
+            <button type="submit" class="btn-auth">Créer mon compte</button>
+
+            <div class="auth-link">
+                Déjà inscrit ? <a href="login.html">Se connecter</a>
+            </div>
         </form>
     </div>
 
     <script>
-        document.getElementById('car-reservation-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Gestion de l'affichage/masquage des mots de passe
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const confirmInput = document.getElementById('confirmPassword');
+            const type = confirmInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Indicateur de force du mot de passe
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthBar = document.getElementById('passwordStrength');
+            const strengthText = document.getElementById('passwordStrengthText');
             
-            // Validation simple
-            const pickupDate = new Date(document.getElementById('pickup-date').value);
-            const returnDate = new Date(document.getElementById('return-date').value);
+            let strength = 0;
+            let text = '';
             
-            if (returnDate <= pickupDate) {
-                alert('La date de restitution doit être postérieure à la date de prise en charge.');
-                return;
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/\d/)) strength++;
+            if (password.match(/[^a-zA-Z\d]/)) strength++;
+            
+            switch(strength) {
+                case 0:
+                case 1:
+                    strengthBar.className = 'strength-bar strength-weak';
+                    text = 'Faible';
+                    break;
+                case 2:
+                case 3:
+                    strengthBar.className = 'strength-bar strength-medium';
+                    text = 'Moyen';
+                    break;
+                case 4:
+                    strengthBar.className = 'strength-bar strength-strong';
+                    text = 'Fort';
+                    break;
             }
             
-            // Simulation de réservation réussie
-            alert('Votre réservation a été soumise avec succès!');
-            // Ici, vous pourriez envoyer les données à un serveur
+            strengthText.textContent = text;
         });
-        
-        // Définir la date minimale comme aujourd'hui
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('pickup-date').min = today;
-        document.getElementById('return-date').min = today;
+
+        // Validation du formulaire
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Ici vous ajouterez la logique de validation et d'envoi
+            console.log('Formulaire d\'inscription soumis');
+        });
     </script>
 </body>
 </html>
+[file content end]

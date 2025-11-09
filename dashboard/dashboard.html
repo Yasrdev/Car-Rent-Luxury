@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dashboard.css">
+    <title>Dashboard - BARIZ CARS</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="/assets/images/bariz-logo.png" alt="BARIZ CARS" class="sidebar-logo">
+                <h2>BARIZ CARS</h2>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Profil utilisateur -->
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h3>Admin User</h3>
+                    <p>Administrateur</p>
+                </div>
+            </div>
+
+            <!-- Menu de navigation -->
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="#dashboard" class="nav-item active" data-content="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#employees" class="nav-item" data-content="employees">
+                            <i class="fas fa-users"></i>
+                            <span>Employés</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#cars" class="nav-item" data-content="cars">
+                            <i class="fas fa-car"></i>
+                            <span>Voitures</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#reservations" class="nav-item" data-content="reservations">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Réservations</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" class="nav-item" data-content="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Paramètres</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Déconnexion -->
+            <div class="sidebar-footer">
+                <a href="#" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Contenu principal -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-menu">
+                        <img src="/assets/images/bariz-logo.png" alt="User" class="user-avatar-small">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Contenu dynamique -->
+            <div class="content-area">
+                <!-- Dashboard Content -->
+                <div id="dashboard-content" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>45</h3>
+                                <p>Voitures totales</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>12</h3>
+                                <p>Employés</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>28</h3>
+                                <p>Réservations actives</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>85%</h3>
+                                <p>Taux d'occupation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h2>Activité récente</h2>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nouvelle voiture ajoutée - Porsche 911</p>
+                                    <span class="activity-time">Il y a 2 heures</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nouvelle réservation - Mercedes Classe S</p>
+                                    <span class="activity-time">Il y a 5 heures</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nouvel employé ajouté</p>
+                                    <span class="activity-time">Il y a 1 jour</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employees Content -->
+                <div id="employees-content" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestion des Employés</h2>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Ajouter un employé
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Email</th>
+                                    <th>Rôle</th>
+                                    <th>Date d'embauche</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>john@barizcars.com</td>
+                                    <td><span class="role-badge admin">Admin</span></td>
+                                    <td>15/01/2023</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Jane Smith</td>
+                                    <td>jane@barizcars.com</td>
+                                    <td><span class="role-badge manager">Manager</span></td>
+                                    <td>20/03/2023</td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cars Content -->
+                <div id="cars-content" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestion des Voitures</h2>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Ajouter une voiture
+                        </button>
+                    </div>
+                    <div class="cars-grid">
+                        <div class="car-card">
+                            <div class="car-image">
+                                <img src="/assets/images/car-1.png" alt="Porsche 911">
+                                <span class="car-status available">Disponible</span>
+                            </div>
+                            <div class="car-info">
+                                <h3>Porsche 911</h3>
+                                <p>2023 • Sport</p>
+                                <div class="car-price">€250/jour</div>
+                            </div>
+                            <div class="car-actions">
+                                <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                <button class="btn-action"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="car-card">
+                            <div class="car-image">
+                                <img src="/assets/images/car-2.jpg" alt="Mercedes Classe S">
+                                <span class="car-status reserved">Réservée</span>
+                            </div>
+                            <div class="car-info">
+                                <h3>Mercedes Classe S</h3>
+                                <p>2023 • Luxe</p>
+                                <div class="car-price">€180/jour</div>
+                            </div>
+                            <div class="car-actions">
+                                <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                <button class="btn-action"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservations Content -->
+                <div id="reservations-content" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestion des Réservations</h2>
+                        <button class="btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Nouvelle réservation
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Voiture</th>
+                                    <th>Date de début</th>
+                                    <th>Date de fin</th>
+                                    <th>Prix total</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mohamed Ali</td>
+                                    <td>Porsche 911</td>
+                                    <td>15/12/2023</td>
+                                    <td>20/12/2023</td>
+                                    <td>€1,250</td>
+                                    <td><span class="status-badge confirmed">Confirmée</span></td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sarah Johnson</td>
+                                    <td>Mercedes Classe S</td>
+                                    <td>18/12/2023</td>
+                                    <td>22/12/2023</td>
+                                    <td>€720</td>
+                                    <td><span class="status-badge pending">En attente</span></td>
+                                    <td>
+                                        <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Settings Content -->
+                <div id="settings-content" class="content-section">
+                    <div class="section-header">
+                        <h2>Paramètres</h2>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-card">
+                            <div class="setting-icon">
+                                <i class="fas fa-user-cog"></i>
+                            </div>
+                            <h3>Profil</h3>
+                            <p>Gérer vos informations personnelles</p>
+                            <button class="btn-secondary">Modifier</button>
+                        </div>
+                        <div class="setting-card">
+                            <div class="setting-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Sécurité</h3>
+                            <p>Changer votre mot de passe</p>
+                            <button class="btn-secondary">Modifier</button>
+                        </div>
+                        <div class="setting-card">
+                            <div class="setting-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <h3>Notifications</h3>
+                            <p>Configurer les alertes</p>
+                            <button class="btn-secondary">Configurer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
